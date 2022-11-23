@@ -1,25 +1,20 @@
-import logo from './logo.svg';
 import './App.css';
+import DisplayClaim from './components/DisplayClaim/DisplayClaim';
+import NewClaim from './components/NewClaim/NewClaim';
+import OpenClaim from './components/OpenClaim/OpenClaim';
+import SearchClaim from './components/SearchClaim/SearchClaim';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+
+    return (
+      <div>
+        <NewClaim />
+        <OpenClaim />
+        <SearchClaim />
+        <DisplayClaim />
+      </div>
+    );
+  }
+
 
 export default App;
