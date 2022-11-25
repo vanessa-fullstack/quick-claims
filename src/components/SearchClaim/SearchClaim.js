@@ -1,6 +1,10 @@
+import { getAllClaimsInfo } from '../../data/DataFunctions';
 import '../stylesheet.css';
+import SearchClaimsRow from './SearchClaimsRow';
 
 const SearchClaim = () => {
+
+    const claims = getAllClaimsInfo();
 
     return <div className="container">
     <h1>Search For a Claim</h1>
@@ -11,7 +15,7 @@ const SearchClaim = () => {
     </ul>
     <p>
         <label htmlFor="policy_num">Policy Number</label>
-        <input type="text" name="policy_num" id="policy_num" placeholder="e.g.009123456"/>
+        <input type="text" name="policy_num" id="policy_num" placeholder="e.g.129123456"/>
     </p>
     <p>
         <label htmlFor="customer_name">Customer Name</label>
@@ -19,28 +23,24 @@ const SearchClaim = () => {
     </p>
     <button>Search</button>
 
-    <table>
-        <thread>
+    <table className="transactionsTable">
+        <thead>
         <tr>
+            <th>ID</th>
             <th>Policy Number</th>
             <th>Customer Name</th>
             <th>Status</th>
+            <th>Claim Type</th>
+            <th>Date of Claim</th>
             <th></th>
         </tr>
-        {/* <tr>
-            <td>009145623</td>
-            <td>Maria Anders</td>
-            <td>Active</td>
-            <td><button>Open</button></td>
-        </tr>
-        <tr>
-            <td>009745189</td>
-            <td>Jane Doe</td>
-            <td>Awaiting</td>
-            <td><button>Open</button></td>
-        </tr> */}
-        </thread>
-        <tbody></tbody>
+        </thead>
+        <tbody>
+            {claims.map( (claim, index) => {
+                return <SearchClaimsRow key={index} id={claim.id} policy_num={claim.policy_num}
+                customer_name={claim.customer_name} status={claim.status} claim_type={claim.claim_type} claim_date={claim.claim_date}/>
+            })}
+        </tbody>
     </table>
 </div>
 }
