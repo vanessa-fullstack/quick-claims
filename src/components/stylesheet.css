@@ -33,6 +33,10 @@ button:hover{
     background-color: #24612c;
 }
 
+#list{
+    display:none;
+}
+
 table, th, td{
     background-color: #ffffcc;
     border: 1px solid;

@@ -15,10 +15,6 @@ const OpenClaim = () => {
 
     const [selectedStatus, setSelectedStatus] = useState([statusTypes[0]]);
 
-    // const changeStatus = (event) => {
-    //     const status = event.target.options.selectedIndex;
-    //     setSelectedStatus(statusTypes[status]);
-    // }
     const changeStatus = (event) => {
         const option = event.target.options.selectedIndex;
         setSelectedStatus(statusTypes[option]);
@@ -31,7 +27,7 @@ const OpenClaim = () => {
         {/* <option value="" disabled={true}> ---select---</option> */}
         {statusTypes.map (status => <option key={status} value={status}>{status}</option>)}
     </select>
-    </div>{selectedStatus}
+    </div>
     <table className="transactionsTable">
         <thead>
         <tr>
@@ -48,21 +44,6 @@ const OpenClaim = () => {
                 policy_num={claim.policy_num} customer_name={claim.customer_name} status={claim.status} />
             })
             }
-            {/* {
-            payments.map( (payment, index) => {
-                return  payment.country === selectedCountry && <TransactionsRow key={index} id={payment.id} date={payment.date}
-                country = {payment.country}  currency = {payment.currency} 
-                amount={payment.amount}   />
-            }   ) 
-
-            } */}
-
-            {/* {openClaims
-            .filter (claim => claim.status === selectedStatus)
-            .map( (claim, index) => {
-                return claim.status === selectedStatus && <OpenClaimsRow key={index} id={claim.id} policy_num={claim.policy_num}
-                customer_name={claim.customer_name} status={claim.status} />
-            })} */}
         </tbody>
     </table>
 </div>

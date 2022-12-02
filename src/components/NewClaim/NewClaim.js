@@ -2,10 +2,22 @@ import '../stylesheet.css';
 
 const NewClaim = () => {
 
+    const hideInstructions = () => {
+        const x = document.getElementById("list");
+        if(x.style.display === "none"){
+            x.style.display = "block";
+            document.getElementById("instructions").innerText = "^To start a new claim";
+        }
+        else {
+            x.style.display = "none";
+            document.getElementById("instructions").innerText = ">To start a new claim";
+        }
+    }
+
     return <div className="container">
             <h1>Register a new claim</h1>
-            <h2>To start a new claim</h2>
-            <ul>
+            <h2 id="instructions" onClick={hideInstructions}>&gt;To start a new claim</h2>
+            <ul id="list">
                 <li>Please complete the following fields marked with an *</li>
                 <li>Only complete the fields neccesary to your claim e.g. if claim is for property, expand and complete the property section</li>
                 <li>Select "Register Claims" to complete</li>
