@@ -47,3 +47,15 @@ export const getAllClaimsInfo = () => {
        
     ]
 }
+
+const headers = new Headers({"Accept" : "application/json"})
+
+
+export const getAllPaymentsFetchVersion = () => { 
+    return fetch ("http://localhost:3000", 
+         {
+            method: "GET",
+            headers : headers            
+        }
+    )
+}

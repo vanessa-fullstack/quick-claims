@@ -14,7 +14,9 @@ const NewClaim = () => {
         }
     }
 
-    return <div className="container">
+    return (
+            <div className="container">
+            <form className="container" >
             <h1>Register a new claim</h1>
             <h2 id="instructions" onClick={hideInstructions}>&gt;To start a new claim</h2>
             <ul id="list">
@@ -52,37 +54,43 @@ const NewClaim = () => {
                 <label htmlFor="further_details">Description of Incident *</label>
                 <input type="text" name="further_details" id="further_details" placeholder="More Details"/>
             </p>
-            <p>
-                <h3>Property Insurance Claims Only</h3>
-                <label htmlFor="address">Address of Property Affected</label>
-                <input type="text" name="address" id="address" placeholder="e.g. 123 Main Street"/>
-            </p>
-            <p>
-                <h3>Motor Insurance Claims Only</h3>
+            <div className='property'>
+                <h3>&gt;Property Insurance Claims Only</h3>
+                <label id="address" htmlFor="address">Address of Property Affected</label>
+                <input type="text" name="address" id="addressInput" placeholder="e.g. 123 Main Street"/>
+
+            </div>
+            <div className='motor'>
+
+                <h3>&gt;Motor Insurance Claims Only</h3>
                 <label htmlFor="make">Make of Vehicle</label>
                 <input type="text" name="make" id="make" placeholder="e.g. htmlFord"/>
-            </p>
-            <p>
+                <p>
                 <label htmlFor="model">Model of Vehicle</label>
                 <input type="text" name="model" id="model" placeholder="e.g. Fiesta"/>
-            </p>
-            <p>
+                </p>
+                <p>
                 <label htmlFor="manufacture_year">Year of Manufacture</label>
                 <input type="text" name="manufacture_year" id="manufacture_year" placeholder="e.g. 2020"/>
-            </p>
-            <p>
-                <h3>Pet Insurance Claims Only</h3>
+                </p>
+            </div>
+            <div className='pet'>
+
+                <h3>&gt;Pet Insurance Claims Only</h3>
                 <label htmlFor="animal">Type of Animal</label>
                 <input type="text" name="animal" id="animal" placeholder="e.g. Dog or Cat"/>
-            </p>
-            <p>
+                <p>
                 <label htmlFor="breed">Breed of Animal</label>
                 <input type="text" name="breed" id="breed" placeholder="e.g. Golden Retriever"/>
-            </p>
+                </p>
+            </div>
             <p>
                 <button>Register Claim</button>
             </p>
+        </form>
         </div>
+
+    )
 }
 
 export default NewClaim;

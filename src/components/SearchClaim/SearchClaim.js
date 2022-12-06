@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { getAllClaimsInfo } from '../../data/DataFunctions';
 import '../stylesheet.css';
 import SearchClaimsRow from './SearchClaimsRow';
@@ -5,6 +6,19 @@ import SearchClaimsRow from './SearchClaimsRow';
 const SearchClaim = () => {
 
     const claims = getAllClaimsInfo();
+
+    const [valid, setValid] = useState(true);
+    const [touched, setTouched] = useState(false);
+
+    const checkValidity = (value) => {
+        setValid(value.trim().length > 0);
+    }
+
+    const handleChange = (event) =>{
+        setTouched(true);
+        checkValidity(event.target.value);
+    }
+
 
     return <div className="container">
     <h1>Search For a Claim</h1>
@@ -15,11 +29,13 @@ const SearchClaim = () => {
     </ul>
     <p>
         <label htmlFor="policy_num">Policy Number</label>
-        <input type="text" name="policy_num" id="policy_num" placeholder="e.g.129123456"/>
+        <input onChange={handleChange} type="text" name="policy_num" id="policy_num" 
+        placeholder="e.g.129123456" style={{border: valid ? "2px solid #000" : "2px solid #f00"}}/>
     </p>
     <p>
         <label htmlFor="customer_name">Customer Name</label>
-        <input type="text" name="customer_name" id="customer_name" placeholder="e.g.John Smith"/>
+        <input onChange={handleChange} type="text" name="customer_name" id="customer_name" 
+        placeholder="e.g.John Smith" style={{border: valid ? "2px solid #000" : "2px solid #f00"}}/>
     </p>
     <button>Search</button>
 
