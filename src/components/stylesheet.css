@@ -60,6 +60,11 @@ select{
     float: none;
 }
 
+#subject{
+    height: 200px;
+    width: 500px;
+}
+
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
     .container{
         width: 767px

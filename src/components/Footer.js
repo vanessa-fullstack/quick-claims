@@ -1,12 +1,14 @@
+import {Link} from 'react-router-dom';
+
 const Footer = () => {
     return (
     <div className="pageFooter" >
-        <h2>Speedy Claims</h2>
+        <h2><Link to="/">Speedy Claims</Link></h2>
         <ul className="nav">
-            <li>Contact Us</li>
-            <li>Information</li>
-            <li>Terms of Use</li>
-            <li>Privacy Policy</li>
+        <li><Link to="/contactus">Contact Us</Link></li>
+        <li><Link to="/information">Information</Link></li>
+        <li><Link to="/termsofuse">Terms of Use</Link></li>
+        <li><Link to="/privacypolicy">Privacy Policy</Link></li>
         </ul>
     </div>);
 }

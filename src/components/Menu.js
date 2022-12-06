@@ -1,12 +1,14 @@
+import {Link} from 'react-router-dom';
+
 const Menu = () => {
     return (
     <div className="pageHeader" >
-        <h1>Speedy Claims</h1>
+        <h1><Link to="/">Speedy Claims</Link></h1>
         <ul className="nav">
-            <li>New Claim</li>
-            <li>Open Claims</li>
-            <li>Search Claims</li>
-            <li>Display a Claim</li>
+            <li><Link to="/newclaim">New Claim</Link></li>
+            <li><Link to="/openclaim">Open Claims</Link></li>
+            <li><Link to="/searchclaim">Search Claims</Link></li>
+            <li><Link to="/displayclaim">Display a Claim</Link></li>
         </ul>
     </div>);
 }
