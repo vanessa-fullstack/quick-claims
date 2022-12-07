@@ -1,3 +1,5 @@
+import axios from "axios"
+
 export const getAllClaimsInfo = () => {
     return [
         {id: 101, policy_num: 129145278, customer_name: "John Smith", status: "Active", claim_type: "Motor", 
@@ -52,14 +54,18 @@ export const getAllClaimsInfo = () => {
     ]
 }
 
-const headers = new Headers({"Accept" : "application/json"})
 
+export const getAllClaimsAxiosVersion  = () => {
+    return axios({url : "http://localhost:8080/api/payment",
+            method: "GET", 
+            headers: {"Accept" : "application/json"}
+            })
+}//this ay change depending on api url 
 
-export const getAllClaimInfoFetchVersion = () => { 
-    return fetch ("http://localhost:3000", 
-         {
-            method: "GET",
-            headers : headers            
-        }
-    )
-}// this will be used to call the data from an api 
+export const addNewClaim = (payment) => {
+    return axios({url : "http://localhost:8080/api/payment",
+            method: "POST",
+            headers: {"Accept" : "application/json", "Content-Type" : "application/json"},
+            data: payment
+        })
+}//this function may update depending on the api url 
