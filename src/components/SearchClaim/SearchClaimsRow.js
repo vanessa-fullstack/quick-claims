@@ -1,3 +1,5 @@
+import {Link} from 'react-router-dom';
+
 const SearchClaimsRow = (props) => {
 
     const openButton = () => {
@@ -13,7 +15,7 @@ const SearchClaimsRow = (props) => {
             <td>{props.status}</td>
             <td>{props.claim_type}</td>
             <td>{props.claim_date}</td>
-            <td><button onClick={openButton}>Open</button></td>
+            <td><Link to="/displayclaim"><button onClick={openButton}>Open </button></Link></td>
         </tr>
     )
 }

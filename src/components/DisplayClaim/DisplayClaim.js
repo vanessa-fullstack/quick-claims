@@ -5,7 +5,7 @@ import { getAllClaimsInfo } from '../../data/DataFunctions';
 import { useState } from 'react';
 
 
-const DisplayClaim = () => {
+const DisplayClaim = (props) => {
 
 
     return <div className="container">

@@ -24,7 +24,9 @@ const OpenClaim = () => {
     <h1>Open Claims</h1>
     <div className="statusTypeSelector">
     Select Claim Status<select onChange={changeStatus} defaultValue="">
+
         {/* <option value="" disabled={true}> ---select---</option> */}
+
         {statusTypes.map (status => <option key={status} value={status}>{status}</option>)}
     </select>
     </div>

@@ -10,8 +10,12 @@ import ContactUs from './components/FooterComponents/ContactUs';
 import Information from './components/FooterComponents/Information';
 import TermsOfUse from './components/FooterComponents/TermsOfUse';
 import PrivacyPolicy from './components/FooterComponents/PrivacyPolicy';
+import { useState } from 'react';
 
 function App() {
+
+  const [searchTerm, setSearchTerm] = useState("");
+
 
     return (
       <BrowserRouter>
@@ -19,9 +23,12 @@ function App() {
       <Routes>
         <Route path="/newclaim" element = {<NewClaim />} />
         <Route path="/openclaim" element = {<OpenClaim />}/>
-        <Route path="/searchclaim" element = {<SearchClaim />}/>
-        <Route path="/displayclaim" element = {<DisplayClaim />}/>
-        <Route path="/" element = { <h1>Welcome to the Speedy Claims system</h1>}/>
+        <Route path="/searchclaim" element = {<SearchClaim
+        setSearchTerm={setSearchTerm} searchTerm={searchTerm}/>}/>
+        <Route path="/displayclaim" element = {<DisplayClaim searchTerm={searchTerm} />}/>
+        <Route path="/" element = {<div className='container'><h1>Welcome to the Speedy Claims system
+          <h4>Navigate your way through the webpage using the menu at the top of the screen</h4>
+        </h1></div>}/>
         <Route path="*" element = { <h1>Sorry - that page doesn't exist</h1>}/>
         <Route path="/contactus" element = {<ContactUs />} />
         <Route path="/information" element = {<Information />} />

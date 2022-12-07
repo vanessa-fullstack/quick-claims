@@ -43,7 +43,11 @@ export const getAllClaimsInfo = () => {
         {id: 110, policy_num: 125012698, customer_name: "Mike Peters", status: "Active", claim_type: "Motor",
         claim_date: "2022-05-19", estimated_value: 150, claim_reason: "wing mirror off",
         make: "Peugeot", model: "208", manufacture_year: 2018, incident_date: "2022-05-18",
-        further_details: "parked on side of street and another car took wing mirror off"}
+        further_details: "parked on side of street and another car took wing mirror off"},
+
+        {id: 111, policy_num: 125012698, customer_name: "Mike Peters", status: "Active", claim_type: "Property",
+        claim_date: "2022-05-19", estimated_value: 175, claim_reason: "broken window",
+        address: "22 Street Ville, Belfast"}
        
     ]
 }
@@ -51,11 +55,11 @@ export const getAllClaimsInfo = () => {
 const headers = new Headers({"Accept" : "application/json"})
 
 
-export const getAllPaymentsFetchVersion = () => { 
+export const getAllClaimInfoFetchVersion = () => { 
     return fetch ("http://localhost:3000", 
          {
             method: "GET",
             headers : headers            
         }
     )
-}
+}// this will be used to call the data from an api 
