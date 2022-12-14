@@ -32,7 +32,6 @@ const NewClaim = () => {
         dispatch({field : event.target.id, value : event.target.value});
     }
 
-    
     const handleSubmit = (event) => {
         event.preventDefault();
         setMessage("Saving...");
@@ -49,7 +48,7 @@ const NewClaim = () => {
             .catch( error => {
                 setMessage("Something went wrong - " + error);
             })
-    } 
+    }
 
     return (
             <div className="container">
@@ -100,7 +99,7 @@ const NewClaim = () => {
             <div className='motor'>
                 <h3>&gt;Motor Insurance Claims Only</h3>
                 <label htmlFor="make">Make of Vehicle</label>
-                <input type="text" name="make" id="make" placeholder="e.g. htmlFord"/>
+                <input type="text" name="make" id="make" placeholder="e.g. Ford"/>
                 <p>
                 <label htmlFor="model">Model of Vehicle</label>
                 <input type="text" name="model" id="model" placeholder="e.g. Fiesta"/>
