@@ -40,6 +40,7 @@ const SearchClaim = (props) => {
             <input onChange={handleChange} value={props.searchTerm} type="text" name="policy_num" 
             id="policy_num" placeholder="e.g.129123456" 
             style={{border: valid ? "2px solid #000" : "2px solid #f00"}}
+            className={valid ? "" : "searchBoxError"}
             />
         </p>
     {/* <p>

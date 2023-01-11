@@ -38,6 +38,10 @@ button:hover{
     display:none;
 }
 
+#prop{
+    display:none;
+}
+
 table, th, td{
     background-color: #ffffcc;
     border: 1px solid;

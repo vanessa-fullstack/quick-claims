@@ -17,6 +17,43 @@ const NewClaim = () => {
             document.getElementById("instructions").innerText = ">To start a new claim";
         }
     }
+    
+    const hidePropertySection = () => {
+        const x = document.getElementById("address");
+        if(x.style.display === "none"){
+            x.style.display = "block";
+            document.getElementById("propSection").innerText = "^Property Insurance Claims Only";
+        }
+        else {
+            x.style.display = "none";
+            document.getElementById("propSection").innerText = ">Property Insurance Claims Only";
+        }
+    }
+
+    const hideMotorSection = () => {
+        const x = document.getElementById("motor");
+        if(x.style.display === "none"){
+            x.style.display = "block";
+            document.getElementById("motorSection").innerText = "^Motor Insurance Claims Only";
+        }
+        else {
+            x.style.display = "none";
+            document.getElementById("motorSection").innerText = ">Motor Insurance Claims Only";
+        }
+    }
+
+    const hidePetSection = () => {
+        const x = document.getElementById("pet");
+        if(x.style.display === "none"){
+            x.style.display = "block";
+            document.getElementById("petSection").innerText = "^Pet Insurance Claims Only";
+        }
+        else {
+            x.style.display = "none";
+            document.getElementById("petSection").innerText = ">Pet Insurance Claims Only";
+        }
+    }
+    
 
     const initialNewClaimState = {customer_name : "", insuranceType : "",
     claim_date : new Date().toISOString().slice(0,10), estimated_value : "",
@@ -90,33 +127,44 @@ const NewClaim = () => {
                 <label htmlFor="further_details">Description of Incident *</label>
                 <input type="text" name="further_details" id="further_details" placeholder="More Details" value={newClaim.further_details} onChange={handleChange}/>
             </p>
+
             <div className='property'>
-                <h3>&gt;Property Insurance Claims Only</h3>
+                <h3 id="propSection" onClick={hidePropertySection}>&gt;Property Insurance Claims Only</h3>
+                <ul id="address">
                 <label id="address" htmlFor="address">Address of Property Affected</label>
                 <input type="text" name="address" id="addressInput" placeholder="e.g. 123 Main Street"/>
-
+                </ul>
             </div>
-            <div className='motor'>
-                <h3>&gt;Motor Insurance Claims Only</h3>
+
+            <div className='motor' >
+                <h3 id="motorSection" onClick={hideMotorSection}>&gt;Motor Insurance Claims Only</h3>
+                <ul id="motor">
                 <label htmlFor="make">Make of Vehicle</label>
                 <input type="text" name="make" id="make" placeholder="e.g. Ford"/>
                 <p>
                 <label htmlFor="model">Model of Vehicle</label>
                 <input type="text" name="model" id="model" placeholder="e.g. Fiesta"/>
                 </p>
+
                 <p>
                 <label htmlFor="manufacture_year">Year of Manufacture</label>
                 <input type="text" name="manufacture_year" id="manufacture_year" placeholder="e.g. 2020"/>
                 </p>
+                </ul>
+                
             </div>
-            <div className='pet'>
-                <h3>&gt;Pet Insurance Claims Only</h3>
+            
+            <div>
+                <h3 id="petSection" onClick={hidePetSection}>&gt;Pet Insurance Claims Only</h3>
+                <ul id="pet">
                 <label htmlFor="animal">Type of Animal</label>
                 <input type="text" name="animal" id="animal" placeholder="e.g. Dog or Cat"/>
+
                 <p>
                 <label htmlFor="breed">Breed of Animal</label>
                 <input type="text" name="breed" id="breed" placeholder="e.g. Golden Retriever"/>
                 </p>
+                </ul>
             </div>
             <p>
                 <button>Register Claim</button>
