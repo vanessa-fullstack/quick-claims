@@ -3,9 +3,24 @@ import DisplayClaimsRow from './DisplayClaimRow';
 import '../stylesheet.css';
 import { getAllClaimsInfo } from '../../data/DataFunctions';
 import { useState } from 'react';
+import OpenClaimsRow from '../OpenClaim/OpenClaimsRow';
 
 
 const DisplayClaim = (props) => {
+
+    const displayClaims = getAllClaimsInfo();//change to database call
+
+    const allStatus = displayClaims.map( claim => claim.status);
+    const statusTypes = allStatus.filter(
+        (status,index) => allStatus.indexOf(status) === index
+    );
+
+    const [selectedStatus, setSelectedStatus] = useState([statusTypes[0]]);
+
+    const changeStatus = (event) => {
+        const option = event.target.options.selectedIndex;
+        setSelectedStatus(statusTypes[option]);
+    }
 
 
     return <div className="container">
@@ -30,6 +45,12 @@ const DisplayClaim = (props) => {
         </tr>
         </thead>
         <tbody>
+        {
+            displayClaims.map( (claim, index) => {
+                return claim.status === selectedStatus && <DisplayClaimsRow key={index} id={claim.id} 
+                policy_num={claim.policy_num} customer_name={claim.customer_name} status={claim.status} claim_type={claim.claim_type}/>
+            })
+            }
             {/* {
             displayClaims.map( (claim, index) => {
                 return claim.status === selectedStatus && <DisplayClaimsRow key={index} id={claim.id} 

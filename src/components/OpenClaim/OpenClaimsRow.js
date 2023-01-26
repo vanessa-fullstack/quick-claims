@@ -13,6 +13,7 @@ const OpenClaimsRow = (props) => {
             <td>{props.policy_num}</td>
             <td>{props.customer_name}</td>
             <td>{props.status}</td>
+            <td>{props.claim_type}</td>
             <td><Link to="/displayclaim"><button onClick={openButton}>Open </button></Link></td>
 
         </tr>

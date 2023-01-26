@@ -118,3 +118,10 @@ select{
     margin-top: 50px;
     max-width: fit-content;
     }
+
+    .transactionsClaimsSelector {
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 50px;
+        max-width: fit-content;
+    }
