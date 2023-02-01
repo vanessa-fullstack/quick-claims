@@ -58,7 +58,7 @@ const NewClaim = () => {
 
     const initialNewClaimState = {customerName : "", insuranceType : "",
     date : new Date().toISOString().slice(0,10), amount : "",
-    reason : "", description : "", address : "", makeOfVehicle : "", modelOfVehicle : "",
+    reason : "", description : "", status : "Active", address : "", makeOfVehicle : "", modelOfVehicle : "",
     yearOfManufacture : "", animal : "", breed : ""}
 
     const formReducer = (state, data) => {
@@ -110,14 +110,7 @@ const NewClaim = () => {
             </p>
             <p>
                 <label htmlFor="insuranceType">Insurance Type *</label>
-                {/* <ClaimsSelector value={newClaim.insuranceType} changeCountry={changeCountry} /> */}
-                <input type="text" id="insuranceType" value={newClaim.insuranceType} onChange={handleChange} />
-                {/* <select name="insuranceType" id="insuranceType">
-                <option value="PleaseSelect" disabled selected>Please Select</option>
-                <option value="Property">Property</option>
-                <option value="Motor">Motor</option>
-                <option value="Pet">Pet</option> 
-                </select>*/}
+                <input type="text" id="insuranceType" placeholder='e.g.Car, Home or Pet' value={newClaim.insuranceType} onChange={handleChange} />
             </p>
             <p>
                 <label htmlFor="date">Claim Start Date *</label>
@@ -143,8 +136,8 @@ const NewClaim = () => {
             <div className='property'>
                 <h3 id="propSection" onClick={hidePropertySection}>&gt;Property Insurance Claims Only</h3>
                 <ul id="property">
-                <label id="address" htmlFor="address">Address of Property Affected</label>
-                <input type="text" name="address" id="addressInput" placeholder="e.g. 123 Main Street" value={newClaim.address} onChange={handleChange}/>
+                <label htmlFor="address">Address of Property Affected</label>
+                <input type="text" name="address" id="address" placeholder="e.g. 123 Main Street" value={newClaim.address} onChange={handleChange}/>
                 </ul>
             </div>
 
