@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { getAllClaimsAxiosVersion, getAllClaimsForName } from "../../data/DataFunctions";
+import { useNavigate } from 'react-router-dom';
 import SearchClaimsRow from "./SearchClaimsRow";
 
 //THIS WAS A REDO BUT NOT CURRENTLY USING
@@ -11,6 +12,7 @@ const Search = (props) => {
 
     const [searchClaims, setSearchClaims] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const navigate = useNavigate();
 
     useEffect( () => {
         loadData();
