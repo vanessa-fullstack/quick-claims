@@ -74,28 +74,28 @@ export const getAllClaimsAxiosVersion  = () => {
 
 export const getAllClaimsForStatus  = (status) => {
     console.log("getAllClaimsForStatus")
-    return axios({url : "http://localhost:8080/api/payment?status="+status,
+    return axios({url : "http://localhost:8080/api/quickclaim?status="+status,
             method: "GET", 
             headers: {"Accept" : "application/json"}
             })
 }
 
 export const getAllClaimsForName  = (customerName) => {
-    return axios({url : "http://localhost:8080/api/payment?customerName="+customerName,
+    return axios({url : "http://localhost:8080/api/quickclaim?customerName="+customerName,
             method: "GET", 
             headers: {"Accept" : "application/json"}
             })
 }
 
 export const getAllClaimsForPolicyNumber  = (policyNumber) => {
-    return axios({url : "http://localhost:8080/api/payment?policyNumber="+policyNumber,
+    return axios({url : "http://localhost:8080/api/quickclaim?policyNumber="+policyNumber,
             method: "GET", 
             headers: {"Accept" : "application/json"}
             })
 }
 
 export const getAllClaimsForInsuranceType  = (insuranceType) => {
-    return axios({url : "http://localhost:8080/api/payment?policyNumber="+insuranceType,
+    return axios({url : "http://localhost:8080/api/quickclaim?policyNumber="+insuranceType,
             method: "GET", 
             headers: {"Accept" : "application/json"}
             })

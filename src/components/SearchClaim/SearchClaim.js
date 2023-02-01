@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {Link} from 'react-router-dom';
+import { getAllClaimsAxiosVersion, getAllClaimsForName } from '../../data/DataFunctions';
+import OpenClaimsRow from '../OpenClaim/OpenClaimsRow';
 
 import '../stylesheet.css';
 
 const SearchClaim = (props) => {
 
-
+    const [searchTerm, setSearchTerm] = useState("");
     const [localSearchTerm, setLocalSearchTerm] = useState("");
     const [valid, setValid] = useState(true);
     const [touched, setTouched] = useState(false);
@@ -17,21 +19,76 @@ const SearchClaim = (props) => {
     }
 
     const handleChange = (event) =>{
-        setLocalSearchTerm(event.target.value);
+        // setLocalSearchTerm(event.target.value);
+        setSearchTerm(event.target.value);
         setTouched(true);
         checkValidity(event.target.value);
     }
 
     const doSearch = (event) => {
         event.preventDefault();
-        props.setSearchTerm(localSearchTerm);
-        navigate(`/search/${localSearchTerm}`);
-        console.log("search term " , props.searchTerm);
+        //props.setSearchTerm(localSearchTerm);
+        // navigate(`/search/${localSearchTerm}`);
+        console.log("search term " , searchTerm);
     }
 
     const openButton = () => {
         console.log("Button has been clicked - this will populate a table and open it in the display claims component")
     } 
+
+    const [displayClaims, setDisplayClaims] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect( () => {
+        //loadStatus();
+        loadData();
+    }, [] );
+
+    useEffect( () => {
+        if(props.searchTerm !== ""){
+            setIsLoading(true);
+            getAllClaimsForName(props.searchTerm)
+            .then( response => {
+                setDisplayClaims(response.data);
+                setIsLoading(false);
+            })
+            .catch( error => {
+                console.log("something went wrong ", error);
+            })
+            // console.log("searching for ", props.searchTerm);
+        }
+    }, [props.searchTerm] );
+
+    const loadData= () =>{
+        
+        getAllClaimsAxiosVersion()
+        .then(response =>{
+            if (response.status === 200){
+                console.log("everything is ok with Axios call");
+                setIsLoading(false);
+                setDisplayClaims(response.data);
+
+            }
+            else{
+                console.log("something went wrong ", response.status)
+            }
+        })
+        .catch( error => {
+            console.log("Something went wrong ", error);
+        })
+    }
+
+
+    const allCustomerNames = displayClaims.map( claim => claim.customerName);
+
+    const uniqueCustomerName = allCustomerNames.filter((customerName, index) => allCustomerNames.indexOf(customerName) === index);
+    console.log(" names ",uniqueCustomerName);
+
+    const [selectedClaim, setSelectedClaim] = useState(uniqueCustomerName[0]);
+    const changeClaimCustomerName = (event) => {
+        const option = event.target.options.selectedIndex;
+        setSelectedClaim(uniqueCustomerName[option]);
+    }
 
     
     return (<div className="container">
@@ -50,7 +107,28 @@ const SearchClaim = (props) => {
             className={valid ? "" : "searchBoxError"}
             />
         </p>
-        <Link to="/displayclaim"><button type="submit" disabled={!valid || !touched } onClick={openButton}>Search</button></Link>
+        {/* <Link to="/displayclaim"><button type="submit" disabled={!valid || !touched } onChange={changeClaimCustomerName} onClick={openButton}>Search</button></Link> */}
+        <button type="submit" disabled={!valid || !touched } onChange={changeClaimCustomerName}>Search</button>
+        <table className="transactionsTable">
+        <thead>
+        <tr>
+            <th>Policy Number</th>
+            <th>Customer Name</th>
+            <th>Status</th>
+            <th>Insurance Type</th>
+        </tr>
+        </thead>
+        <tbody>
+            {
+                displayClaims.map( (claim, index) =>{
+                    return claim.customerName === selectedClaim && <OpenClaimsRow key={index} id={claim.id}
+                    customerName={claim.customerName} 
+                    status={claim.status} insuranceType={claim.insuranceType} />
+                } )
+            }
+        </tbody>
+    </table>
+
     </form>
 </div>
     )

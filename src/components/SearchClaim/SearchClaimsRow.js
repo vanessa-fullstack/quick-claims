@@ -10,11 +10,10 @@ const SearchClaimsRow = (props) => {
     return (
         <tr>
             <td>{props.id}</td>
-            <td>{props.policyNumber}</td>
             <td>{props.customerName}</td>
             <td>{props.status}</td>
             <td>{props.insuranceType}</td>
-            <td>{props.claimDate}</td>
+            <td>{props.date}</td>
             <td><Link to="/displayclaim"><button onClick={openButton}>Open </button></Link></td>
         </tr>
     )

@@ -71,10 +71,6 @@ const NewClaim = () => {
         dispatch({field : event.target.id, value : event.target.value});
     }
 
-    const changeCountry = (insuranceType) => {
-        dispatch({field : "insurance type", value : insuranceType});
-    }
-
     const handleSubmit = (event) => {
         event.preventDefault();
         setMessage("Saving...");
