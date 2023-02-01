@@ -5,6 +5,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import { useEffect, useState } from "react";
 import ClaimsSelector from '../ClaimsSelector';
 
+//THIS IS AN OLD FILE AND IS NOT BEING USED ANYMORE. PLEASE SEE OPENCLAIMSNEW.JS
 
 const OpenClaim = (props) => {
 

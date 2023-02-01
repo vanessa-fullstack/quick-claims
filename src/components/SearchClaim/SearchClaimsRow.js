@@ -10,11 +10,11 @@ const SearchClaimsRow = (props) => {
     return (
         <tr>
             <td>{props.id}</td>
-            <td>{props.policy_num}</td>
-            <td>{props.customer_name}</td>
+            <td>{props.policyNumber}</td>
+            <td>{props.customerName}</td>
             <td>{props.status}</td>
-            <td>{props.claim_type}</td>
-            <td>{props.claim_date}</td>
+            <td>{props.insuranceType}</td>
+            <td>{props.claimDate}</td>
             <td><Link to="/displayclaim"><button onClick={openButton}>Open </button></Link></td>
         </tr>
     )

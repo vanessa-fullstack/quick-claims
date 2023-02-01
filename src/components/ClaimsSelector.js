@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import {useSelector, useDispatch} from 'react-redux';
-import { getAllClaims } from "../data/DataFunctions";
+import { getAllClaimsAxiosVersion, getStatuses } from "../data/DataFunctions";
 
 const ClaimsSelector = (props) => {
 
@@ -27,11 +27,11 @@ const ClaimsSelector = (props) => {
         //if we do, use them, if not, get them from rest + save them in redux
         else {
             console.log("getting claims via rest");
-            getAllClaims()
+            getStatuses()
             .then ( response => {
                 if (response.status === 200) {
                     setuniqueClaims(response.data);
-                    dispatch({type:"updateClaims", value : response.data});
+                    dispatch({type:"update Status of Claims", value : response.data});
                     setIsLoading(false);
                 }
                 else {

@@ -8,7 +8,7 @@ const Menu = () => {
             <li><Link to="/newclaim">New Claim</Link></li>
             <li><Link to="/openclaim">Open Claims</Link></li>
             <li><Link to="/searchclaim">Search Claims</Link></li>
-            <li><Link to="/displayclaim">Display a Claim</Link></li>
+            {/* <li><Link to="/displayclaim">Display a Claim</Link></li> */}
         </ul>
     </div>);
 }

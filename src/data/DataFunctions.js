@@ -1,4 +1,4 @@
-import axios from "axios"
+import axios from "axios";
 
 export const getAllClaimsInfo = () => {
     return [
@@ -52,16 +52,25 @@ export const getAllClaimsInfo = () => {
         address: "22 Street Ville, Belfast"}
        
     ]
-}
+}// no longer using this - all data in database being called via axios
+
+const headers = new Headers({"Accept":"application/json"})
+
+export const getAllClaimsFetchVersion = () =>{ 
+    return fetch("http://localhost:8080/api/quickclaim", 
+    {
+        method: "GET",
+        headers: headers
+    })
+}//no longer using this version can delete later
 
 
-export const getAllClaims  = () => {
-    console.log("get all claims - getAllClaims");
+export const getAllClaimsAxiosVersion  = () => {
     return axios({url : "http://localhost:8080/api/quickclaim",
             method: "GET", 
             headers: {"Accept" : "application/json"}
             })
-}
+}//loading data to the open claims page from the database
 
 export const getAllClaimsForStatus  = (status) => {
     console.log("getAllClaimsForStatus")
@@ -100,3 +109,11 @@ export const addNewClaim = (claim) => {
             data: claim
         })
 }//this function may update depending on the api url 
+
+export const getStatuses = ()  => {
+    console.log("getStatuses")
+    return axios({url : "http://localhost:8080/api/status",
+            method: "GET", 
+            headers: {"Accept" : "application/json"}
+            })
+}

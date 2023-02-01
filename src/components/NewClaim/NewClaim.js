@@ -57,8 +57,9 @@ const NewClaim = () => {
     
 
     const initialNewClaimState = {customerName : "", insuranceType : "",
-    claimDate : new Date().toISOString().slice(0,10), estimatedValue : "",
-    claimReason : "", furtherDetails : ""}
+    date : new Date().toISOString().slice(0,10), amount : "",
+    reason : "", description : "", address : "", makeOfVehicle : "", modelOfVehicle : "",
+    yearOfManufacture : "", animal : "", breed : ""}
 
     const formReducer = (state, data) => {
         return {...state, [data.field] : data.value}
@@ -104,8 +105,8 @@ const NewClaim = () => {
             </ul>
             <h2>Customer Information</h2>
             <p>
-                <label htmlFor="customer_name">Customer Name *</label>
-                <input type="text" name="customer_name" id="customer_name" placeholder="e.g.John Smith" value={newClaim.customerName} onChange={handleChange}/>
+                <label htmlFor="customerName">Customer Name *</label>
+                <input type="text" name="customerName" id="customerName" placeholder="e.g.John Smith" value={newClaim.customerName} onChange={handleChange}/>
             </p>
             <p>
                 <label htmlFor="insuranceType">Insurance Type *</label>
@@ -119,25 +120,29 @@ const NewClaim = () => {
                 </select>*/}
             </p>
             <p>
-                <label htmlFor="claim_date">Claim Start Date *</label>
-                <input type="date" name="claim_date" id="claim_date" value={newClaim.claimDate} onChange={handleChange}/>
+                <label htmlFor="date">Claim Start Date *</label>
+                <input type="date" name="date" id="date" value={newClaim.date} onChange={handleChange}/>
             </p>
             <p>
-                <label htmlFor="estimated_value">Estimated Amount of Claim *</label>
-                <input type="text" name="estimated_value" id="estimated_value" placeholder="e.g.$250" value={newClaim.estimatedValue} onChange={handleChange}/>
+                <label htmlFor="amount">Estimated Amount of Claim *</label>
+                <input type="text" name="amount" id="amount" placeholder="e.g.$250" value={newClaim.amount} onChange={handleChange}/>
             </p>
             <p>
-                <label htmlFor="claim_reason">Reason For Claim *</label>
-                <input type="text" name="claim_reason" id="claim_reason" placeholder="Brief explanation" value={newClaim.claimReason} onChange={handleChange}/>
+                <label htmlFor="reason">Reason For Claim *</label>
+                <input type="text" name="reason" id="reason" placeholder="Brief explanation" value={newClaim.reason} onChange={handleChange}/>
             </p>
             <p>
-                <label htmlFor="further_details">Description of Incident *</label>
-                <input type="text" name="further_details" id="further_details" placeholder="More Details" value={newClaim.furtherDetails} onChange={handleChange}/>
+                <label htmlFor="description">Description of Incident *</label>
+                <input type="text" name="description" id="description" placeholder="More Details" value={newClaim.description} onChange={handleChange}/>
+            </p>
+            <p>
+                <label htmlFor="status">Status</label>
+                <input type="text" name="status" id="status" placeholder="Active" value={newClaim.status} onChange={handleChange}/>
             </p>
 
             <div className='property'>
                 <h3 id="propSection" onClick={hidePropertySection}>&gt;Property Insurance Claims Only</h3>
-                <ul id="address">
+                <ul id="property">
                 <label id="address" htmlFor="address">Address of Property Affected</label>
                 <input type="text" name="address" id="addressInput" placeholder="e.g. 123 Main Street" value={newClaim.address} onChange={handleChange}/>
                 </ul>
@@ -146,16 +151,16 @@ const NewClaim = () => {
             <div className='motor' >
                 <h3 id="motorSection" onClick={hideMotorSection}>&gt;Motor Insurance Claims Only</h3>
                 <ul id="motor">
-                <label htmlFor="make">Make of Vehicle</label>
-                <input type="text" name="make" id="make" placeholder="e.g. Ford" value={newClaim.make} onChange={handleChange}/>
+                <label htmlFor="makeOfVehicle">Make of Vehicle</label>
+                <input type="text" name="makeOfVehicle" id="makeOfVehicle" placeholder="e.g. Ford" value={newClaim.makeOfVehicle} onChange={handleChange}/>
                 <p>
-                <label htmlFor="model">Model of Vehicle</label>
-                <input type="text" name="model" id="model" placeholder="e.g. Fiesta" value={newClaim.model} onChange={handleChange}/>
+                <label htmlFor="modelOfVehicle">Model of Vehicle</label>
+                <input type="text" name="modelOfVehicle" id="modelOfVehicle" placeholder="e.g. Fiesta" value={newClaim.modelOfVehicle} onChange={handleChange}/>
                 </p>
 
                 <p>
-                <label htmlFor="manufacture_year">Year of Manufacture</label>
-                <input type="text" name="manufacture_year" id="manufacture_year" placeholder="e.g. 2020" value={newClaim.manufacture_year} onChange={handleChange}/>
+                <label htmlFor="yearOfManufacture">Year of Manufacture</label>
+                <input type="text" name="yearOfManufacture" id="yearOfManufacture" placeholder="e.g. 2020" value={newClaim.yearOfManufacture} onChange={handleChange}/>
                 </p>
                 </ul>
                 

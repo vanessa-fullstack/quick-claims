@@ -37,11 +37,13 @@ const DisplayClaim = (props) => {
             <th>Claim Date</th>
             <th>Estimated Value</th>
             <th>Claim Reason</th>
+            <th>Further Details</th>
             <th>Make</th>
             <th>Model</th>
             <th>Manufacture Year</th>
-            <th>Incicdent Date</th>
-            <th>Further Details</th>
+            <th>Address</th>
+            <th>Animal</th>
+            <th>Breed</th>
         </tr>
         </thead>
         <tbody>

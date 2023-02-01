@@ -10,11 +10,14 @@ const DisplayClaimsRow = (props) => {
             <td>{props.claim_date}</td>
             <td>{props.estimated_value}</td>
             <td>{props.claim_reason}</td>
+            <td>{props.further_details}</td>
             <td>{props.make}</td>
             <td>{props.model}</td>
             <td>{props.manufacture_year}</td>
-            <td>{props.incident_date}</td>
-            <td>{props.further_details}</td>
+            <td>{props.address}</td>
+            <td>{props.animal}</td>
+            <td>{props.breed}</td>
+
         </tr>
     )
 }
