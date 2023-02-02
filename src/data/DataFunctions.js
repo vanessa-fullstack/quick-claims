@@ -87,8 +87,8 @@ export const getAllClaimsForName  = (customerName) => {
             })
 }
 
-export const getAllClaimsForPolicyNumber  = (policyNumber) => {
-    return axios({url : "http://localhost:8080/api/quickclaim?policyNumber="+policyNumber,
+export const getAllClaimsForPolicyNumber  = (id) => {
+    return axios({url : "http://localhost:8080/api/quickclaim?policyNumber="+id,
             method: "GET", 
             headers: {"Accept" : "application/json"}
             })

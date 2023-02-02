@@ -37,7 +37,11 @@ const OpenClaimsRow = (props) => {
             <td>{props.customerName}</td>
             <td>{props.status}</td>
             <td>{props.insuranceType}</td>
-            <td><Link to="/displayclaim"><button onClick={editButton}>Edit </button></Link></td>
+            <td>{props.date}</td>
+            <td>{props.amount}</td>
+            <td>{props.reason}</td>
+            <td>{props.description}</td>
+            {/* <td><Link to="/displayclaim"><button onClick={editButton}>Edit </button></Link></td> */}
 
         </tr>
     )

@@ -6,6 +6,7 @@ import '../stylesheet.css';
 const NewClaim = () => {
 
     const [message, setMessage] = useState();
+    const [valid, setValid] = useState(true);
 
     const hideInstructions = () => {
         const x = document.getElementById("list");
@@ -55,6 +56,9 @@ const NewClaim = () => {
         }
     }
     
+    const checkValidity = (value) => {
+        setValid(value.trim().length > 0);
+    }
 
     const initialNewClaimState = {customerName : "", insuranceType : "",
     date : new Date().toISOString().slice(0,10), amount : "",
@@ -69,6 +73,8 @@ const NewClaim = () => {
 
     const handleChange = (event) => {
         dispatch({field : event.target.id, value : event.target.value});
+        checkValidity(event.target.value);
+
     }
 
     const handleSubmit = (event) => {
@@ -102,27 +108,33 @@ const NewClaim = () => {
             <h2>Customer Information</h2>
             <p>
                 <label htmlFor="customerName">Customer Name *</label>
-                <input type="text" name="customerName" id="customerName" placeholder="e.g.John Smith" value={newClaim.customerName} onChange={handleChange}/>
+                <input type="text" name="customerName" id="customerName" placeholder="e.g.John Smith" value={newClaim.customerName} onChange={handleChange}
+                style={{border : valid ? "2px solid #000" : "2px solid #f00"}}/>
             </p>
             <p>
                 <label htmlFor="insuranceType">Insurance Type *</label>
-                <input type="text" id="insuranceType" placeholder='e.g.Car, Home or Pet' value={newClaim.insuranceType} onChange={handleChange} />
+                <input type="text" id="insuranceType" placeholder='e.g.Car, Home or Pet' value={newClaim.insuranceType}
+                onChange={handleChange} style={{border : valid ? "2px solid #000" : "2px solid #f00"}} />
             </p>
             <p>
                 <label htmlFor="date">Claim Start Date *</label>
-                <input type="date" name="date" id="date" value={newClaim.date} onChange={handleChange}/>
+                <input type="date" name="date" id="date" value={newClaim.date} onChange={handleChange}
+                style={{border : valid ? "2px solid #000" : "2px solid #f00"}}/>
             </p>
             <p>
                 <label htmlFor="amount">Estimated Amount of Claim *</label>
-                <input type="text" name="amount" id="amount" placeholder="e.g.$250" value={newClaim.amount} onChange={handleChange}/>
+                <input type="text" name="amount" id="amount" placeholder="e.g.$250" value={newClaim.amount}
+                onChange={handleChange} style={{border : valid ? "2px solid #000" : "2px solid #f00"}}/>
             </p>
             <p>
                 <label htmlFor="reason">Reason For Claim *</label>
-                <input type="text" name="reason" id="reason" placeholder="Brief explanation" value={newClaim.reason} onChange={handleChange}/>
+                <input type="text" name="reason" id="reason" placeholder="Brief explanation" value={newClaim.reason}
+                onChange={handleChange} style={{border : valid ? "2px solid #000" : "2px solid #f00"}}/>
             </p>
             <p>
                 <label htmlFor="description">Description of Incident *</label>
-                <input type="text" name="description" id="description" placeholder="More Details" value={newClaim.description} onChange={handleChange}/>
+                <input type="text" name="description" id="description" placeholder="More Details" value={newClaim.description}
+                onChange={handleChange} style={{border : valid ? "2px solid #000" : "2px solid #f00"}}/>
             </p>
             <p>
                 <label htmlFor="status">Status</label>

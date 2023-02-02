@@ -1,4 +1,4 @@
-import { getAllClaimsAxiosVersion, getAllClaimsForName } from '../../data/DataFunctions';
+import { getAllClaimsAxiosVersion, getAllClaimsForName, getAllClaimsForStatus } from '../../data/DataFunctions';
 import OpenClaimsRow from './OpenClaimsRow';
 import '../stylesheet.css';
 import {useSelector, useDispatch} from 'react-redux';
@@ -18,7 +18,7 @@ const OpenClaim = (props) => {
     useEffect( () => {
         if(props.searchTerm !== ""){
             setIsLoading(true);
-            getAllClaimsForName(props.searchTerm)
+            getAllClaimsForStatus(props.searchTerm)
             .then( response => {
                 setOpenClaims(response.data);
                 setIsLoading(false);
@@ -64,7 +64,15 @@ const OpenClaim = (props) => {
 
     return <div className="container">
     <h1>Open Claims</h1>
-    <h2>Use the drop down menu available to select the status of the claims</h2>
+    <h2>Claim Statuses available:</h2>
+    <ul>Use the drop down menu available to select the status of the claims. 
+    <li>Active (currently being worked on)</li>
+    <li>Waiting on assessment (not yet reviewed)</li>
+    <li>Awaiting Payment (accepted but needs paid)</li>
+    <li>Closed</li>
+    <li>Rejected</li>
+    <li>Passed to main platform</li>
+    </ul>
     {!isLoading && props.searchTerm === "" }
     {!isLoading && <div className="statusTypeSelector">
         Select status of claim:<select onChange={changeClaimStatus}>
@@ -80,6 +88,10 @@ const OpenClaim = (props) => {
             <th>Customer Name</th>
             <th>Status</th>
             <th>Insurance Type</th>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Reason</th>
+            <th>Description</th>
         </tr>
         </thead>
         <tbody>
@@ -87,7 +99,9 @@ const OpenClaim = (props) => {
                 openClaims.map( (claim, index) =>{
                     return claim.status === selectedClaim && <OpenClaimsRow key={index} id={claim.id}
                     customerName={claim.customerName} 
-                    status={claim.status} insuranceType={claim.insuranceType} />
+                    status={claim.status} insuranceType={claim.insuranceType}
+                    date={claim.date} amount={claim.amount} reason={claim.reason}
+                    description={claim.description} />
                 } )
             }
         </tbody>

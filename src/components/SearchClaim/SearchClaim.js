@@ -6,6 +6,7 @@ import OpenClaimsRow from '../OpenClaim/OpenClaimsRow';
 
 import '../stylesheet.css';
 
+//THIS WAS A FIRST ATTEMPT BUT NO LONGER IN USE
 const SearchClaim = (props) => {
 
     const [searchTerm, setSearchTerm] = useState("");
