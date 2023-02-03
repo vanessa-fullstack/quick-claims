@@ -109,7 +109,8 @@ const NewClaim = () => {
             <p>
                 <label htmlFor="customerName">Customer Name *</label>
                 <input type="text" name="customerName" id="customerName" placeholder="e.g.John Smith" value={newClaim.customerName} onChange={handleChange}
-                style={{border : valid ? "2px solid #000" : "2px solid #f00"}}/>
+                style={{border : valid ? "2px solid #000" : "2px solid #f00"}}
+                className={ valid ? "" : "searchBoxError"}/>
             </p>
             <p>
                 <label htmlFor="insuranceType">Insurance Type *</label>

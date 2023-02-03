@@ -1,8 +1,9 @@
 import { useEffect, useState, Fragment } from "react"
-import { getAllClaimsAxiosVersion, getAllClaimsForName, getAllClaimsForPolicyNumber } from "../../data/DataFunctions";
+import { getAllClaimsAxiosVersion, getAllClaimsForName, getAllClaimsForPolicyNumber, updateExitingClaim } from "../../data/DataFunctions.js";
 import { useNavigate } from 'react-router-dom';
 import SearchClaimsRow from "./SearchClaimsRow";
 import EditSearchRow from "./EditSearchRow";
+import axios from "axios"
 
 //THIS WAS A REDO AND CURRENTLY IN USE
 const Search = ( props ) => {
@@ -10,12 +11,21 @@ const Search = ( props ) => {
     const [searchTerm, setSearchTerm] = useState("");
     const [valid, setValid] = useState(true);
     const [touched, setTouched] = useState(false);
+    const [message, setMessage] = useState();
 
     const [searchClaims, setSearchClaims] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const navigate = useNavigate();
 
+    const [editClaimFields, setEditClaimFields] = useState(searchClaims);
     const [editClaimId, setEditClaimId] = useState(null);
+    const [editClaimData, setEditClaimData] = useState({
+        customerName: "",
+        status: "",
+        insuranceType: "",
+        date: "",
+        amount: "",
+        reason: ""
+    });
 
     useEffect( () => {
         loadData();
@@ -83,15 +93,76 @@ const Search = ( props ) => {
     const doSearch = (event) => {
         event.preventDefault();
         console.log("Searching for", searchTerm )
+
+        const editedClaim = {
+            id: editClaimId,
+            customerName: editClaimData.customerName,
+            status: editClaimData.status,
+            insuranceType: editClaimData.insuranceType,
+            date: editClaimData.date,
+            amount: editClaimData.amount,
+            reason: editClaimData.reason
+        }
+
+        const newClaimDetails = [...editClaimFields];
+        const index = editClaimFields.findIndex((claim) => claim.id === editClaimId);
+
+        newClaimDetails[index] = editedClaim;
+        setEditClaimFields(newClaimDetails);
+        setEditClaimId(null);
     }
 
-        const handleEditClick = (event, props) => {
+    const handleSaveClick = (event) => { //look at this const again... cors policy block in console
+        setMessage("Saving...");
+        updateExitingClaim()
+            .then( response => {
+                if (response.status === 200) {
+                    setMessage("New transaction added with Policy Number " + response.data.id);
+                }
+                else {
+                    setMessage("Something went wrong - status code was " + response.status);
+                }
+        
+            } )
+            .catch( error => {
+                setMessage("Something went wrong - " + error);
+            })
+
+    }
+
+    const handleEditClick = (event, props) => {
         console.log("button clicked ", props.customerName)
         event.preventDefault();
         setEditClaimId(props.customerName);
+
+        const claimValues = {
+            customerName: props.customerName,
+            status: props.status,
+            insuranceType: props.insuranceType,
+            date: props.date,
+            amount: props.amount,
+            reason: props.reason
+        }
+        setEditClaimData(claimValues);
     }
 
-    return <div className="container">
+    const handleEditClaimData = (event) =>{
+        event.preventDefault();
+
+        const fieldName = event.target.getAttribute("name");
+        const fieldValue = event.target.value;
+
+        const newClaimData = { ...editClaimData };
+        newClaimData[fieldName] = fieldValue;
+        setEditClaimData(newClaimData);
+    }
+
+    const handleCancel = () => {
+        setEditClaimId(null);
+    }
+
+
+    return <div className="searchcontainer">
         <form onSubmit={doSearch}>
         {/* <form> */}
         <h1>Search For a Claim</h1>
@@ -106,11 +177,13 @@ const Search = ( props ) => {
         <label htmlFor="customerName">Customer Name</label>
         <input onChange={handleChange} id="customerName" type="search"
         placeholder="e.g. Jane Doe" style={{border : valid ? "2px solid #000" : "2px solid #f00"}}
+        className={ valid ? "" : "searchBoxError"}
         />
         {/* <button type="submit" disabled={!valid || !touched} onChange={changeClaimName} value={searchTerm} >
         Search</button> */}
         {isLoading && <p style={{textAlign : "center"}}>Please wait... loading</p>}
-        <table className="transactionsTable">
+        <div className="editSearchRow">
+        <table className="searchTransactionsTable">
         <thead>
         <tr>
             <th>Policy Number</th>
@@ -135,6 +208,8 @@ const Search = ( props ) => {
                         customerName={claim.customerName} 
                         status={claim.status} insuranceType={claim.insuranceType} 
                         date={claim.date} amount={claim.amount} reason={claim.reason}
+                        editClaimData={editClaimData} handleEditClaimData={handleEditClaimData}
+                        handleCancel={handleCancel} handleSaveClick={handleSaveClick}
                         />
                     ) : (
                         <SearchClaimsRow key={index} id={claim.id}
@@ -143,24 +218,12 @@ const Search = ( props ) => {
                         date={claim.date} amount={claim.amount} reason={claim.reason}
                         handleEditClick={handleEditClick}  />
                     )}
-
-                        {/* <EditSearchRow 
-                        key={index}
-                        customerName={claim.customerName} 
-                        status={claim.status} insuranceType={claim.insuranceType} 
-                        date={claim.date} amount={claim.amount} reason={claim.reason}
-                        />
-                        <SearchClaimsRow key={index} id={claim.id}
-                        customerName={claim.customerName} 
-                        status={claim.status} insuranceType={claim.insuranceType} 
-                        date={claim.date} amount={claim.amount} reason={claim.reason}
-                        handleEditClick={handleEditClick}  /> */}
-
                     </Fragment>
                 } )
             }
         </tbody>
         </table> 
+        </div>
         </form>
     </div>
 }

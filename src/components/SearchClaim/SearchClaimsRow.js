@@ -1,21 +1,6 @@
-import {Link} from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import Search from './Search';
 
 //This is the read only rows
-const SearchClaimsRow = (props, { handleEditClick }) => {
-    const navigate = useNavigate();
-
-    // const editButton = (event) => {
-    //     console.log("Button has been clicked - this will populate a table and open it in the display claims component")
-    //     // navigate('/displayclaim');
-    //     event.preventDefault();
-    //     // setEditClaimId(claim.id);
-    // } 
-
-    // const handleEditClick = (event) => {
-    //     console.log("handleEditClick")
-    // }
+const SearchClaimsRow = (props) => {
 
     return (
         <tr>
@@ -30,9 +15,7 @@ const SearchClaimsRow = (props, { handleEditClick }) => {
             <td>
                 <button 
                 type="button"
-                // onClick={Search.handleEditClick}>
                 onClick={(event)=>props.handleEditClick(event, props)}>
-
                 Edit
                 </button>
             </td>

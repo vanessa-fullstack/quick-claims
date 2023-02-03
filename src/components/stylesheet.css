@@ -14,6 +14,14 @@ h1{
     margin-right: auto;
 }
 
+.searchcontainer{
+    border: 1px solid #ccc;
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
 label{
     min-width: 300px;
     display: inline-block;
@@ -53,6 +61,21 @@ table, th, td{
     margin-right: auto;
     border: 1px solid #999;
     border-collapse: collapse;
+}
+
+.searchTransactionsTable {
+    margin-top: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid #999;
+    border-collapse: collapse;
+    overflow: scroll;
+
+}
+.editSearchRow {
+
+    overflow: scroll;
+
 }
 
 input{

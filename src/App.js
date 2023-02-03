@@ -5,7 +5,7 @@ import Footer from './components/Footer';
 import Menu from './components/Menu';
 import NewClaim from './components/NewClaim/NewClaim';
 import OpenClaim from './components/OpenClaim/OpenClaimNew';
-import SearchClaim from './components/SearchClaim/Search';
+import Search from './components/SearchClaim/Search';
 import ContactUs from './components/FooterComponents/ContactUs';
 import Information from './components/FooterComponents/Information';
 import TermsOfUse from './components/FooterComponents/TermsOfUse';
@@ -23,10 +23,10 @@ function App() {
       <Routes>
         <Route path="/newclaim" element = {<NewClaim />} />
         <Route path="/openclaim" element = {<OpenClaim searchTerm={searchTerm} />}/>
-        <Route path="/searchclaim" element = {<SearchClaim
+        <Route path="/searchclaim" element = {<Search
         setSearchTerm={setSearchTerm} />}/>
         {/* <Route path="/searchclaim" element = {<SearchClaim searchTerm={searchTerm} />}/> */}
-        <Route path="/displayclaim" element = {<DisplayClaim searchTerm={searchTerm} />}/>
+        {/* <Route path="/displayclaim" element = {<DisplayClaim searchTerm={searchTerm} />}/> */}
         <Route path="/" element = {<div className='container'><h1>Welcome to the Speedy Claims system
           <h4>Navigate your way through the webpage using the menu at the top of the screen</h4>
         </h1></div>}/>
