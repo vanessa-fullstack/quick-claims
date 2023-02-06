@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import {useSelector, useDispatch} from 'react-redux';
 import { getAllClaimsAxiosVersion, getStatuses } from "../data/DataFunctions";
 
+
+//----THIS IS NOT CURRENTLY IN USE---//
 const ClaimsSelector = (props) => {
 
     useEffect( () => {

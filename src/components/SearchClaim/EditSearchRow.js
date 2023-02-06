@@ -35,6 +35,10 @@ const EditSearchRow = (props) => {
                 value={props.editClaimData.reason} onChange={props.handleEditClaimData}></input>
             </td>
             <td>
+                <input type="text" placeholder="Update Description..." name="description"
+                value={props.editClaimData.description} onChange={props.handleEditClaimData}></input>
+            </td>
+            <td>
                 <button type="submit" onClick={props.handleSaveClick}>Save</button>
                 <button type="submit" onClick={props.handleCancel}>Cancel</button>
             </td>

@@ -11,7 +11,7 @@ const SearchClaimsRow = (props) => {
             <td>{props.date}</td>
             <td>{props.amount}</td>
             <td>{props.reason}</td>
-
+            <td>{props.description}</td>
             <td>
                 <button 
                 type="button"

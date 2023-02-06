@@ -95,26 +95,10 @@ const Search = ( props ) => {
         event.preventDefault();
         console.log("Searching for", searchTerm )
 
-        // const editedClaim = {
-        //     id: editClaimData.editClaimId,
-        //     customerName: editClaimData.customerName,
-        //     status: editClaimData.status,
-        //     insuranceType: editClaimData.insuranceType,
-        //     date: editClaimData.date,
-        //     amount: editClaimData.amount,
-        //     reason: editClaimData.reason
-        // }
-
-        // const newClaimDetails = [...editClaimFields];
-        // const index = editClaimFields.findIndex((claim) => claim.id === props.editClaimId);
-
-        // newClaimDetails[index] = editedClaim;
-        // setEditClaimFields(newClaimDetails);
-        // setEditClaimId(null);
     }
 
 
-    const handleSaveClick = (event) => { //look at this const again... falling to catch block
+    const handleSaveClick = (event) => { 
         event.preventDefault();
 
         const editedClaim = {
@@ -124,7 +108,8 @@ const Search = ( props ) => {
             insuranceType: editClaimData.insuranceType,
             date: editClaimData.date,
             amount: editClaimData.amount,
-            reason: editClaimData.reason
+            reason: editClaimData.reason,
+            description: editClaimData.description
         }
 
         const newClaimDetails = [...editClaimFields];
@@ -166,7 +151,8 @@ const Search = ( props ) => {
             insuranceType: props.insuranceType,
             date: props.date,
             amount: props.amount,
-            reason: props.reason
+            reason: props.reason,
+            description: props.description
         }
         setEditClaimData(claimValues);
     }
@@ -218,6 +204,7 @@ const Search = ( props ) => {
             <th>Date</th>
             <th>Amount</th>
             <th>Reason</th>
+            <th>Description</th>
             <th>Action</th>
         </tr>
         </thead>
@@ -233,6 +220,7 @@ const Search = ( props ) => {
                         customerName={claim.customerName} 
                         status={claim.status} insuranceType={claim.insuranceType} 
                         date={claim.date} amount={claim.amount} reason={claim.reason}
+                        description={claim.description}
                         editClaimData={editClaimData} handleEditClaimData={handleEditClaimData}
                         handleCancel={handleCancel} handleSaveClick={handleSaveClick}
                         />
@@ -241,6 +229,7 @@ const Search = ( props ) => {
                         customerName={claim.customerName} 
                         status={claim.status} insuranceType={claim.insuranceType} 
                         date={claim.date} amount={claim.amount} reason={claim.reason}
+                        description={claim.description} 
                         handleEditClick={handleEditClick}  />
                     )}
                     </Fragment>

@@ -1,3 +1,4 @@
+//---THIS IS NO LONGER IN USE---//
 const DisplayClaimsRow = (props) => {
 
     return (

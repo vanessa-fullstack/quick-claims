@@ -6,7 +6,7 @@ import OpenClaimsRow from '../OpenClaim/OpenClaimsRow';
 
 import '../stylesheet.css';
 
-//THIS WAS A FIRST ATTEMPT BUT NO LONGER IN USE
+//---THIS WAS A FIRST ATTEMPT BUT NO LONGER IN USE. PLEASE SEE SEARCH.JS FOR CURRENT VERSION---//
 const SearchClaim = (props) => {
 
     const [searchTerm, setSearchTerm] = useState("");

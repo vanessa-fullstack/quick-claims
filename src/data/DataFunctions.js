@@ -66,7 +66,7 @@ export const getStatuses = ()  => {
             })
 }
 
-//update            PUT /api/payment/142645
+//update PUT /api/payment/142645
 
 export const updateExitingClaim = (claim) => {
     console.log("Checking this ", claim);
@@ -76,4 +76,4 @@ export const updateExitingClaim = (claim) => {
             data: claim
         })
         
-}//this function may update depending on the api url 
+}
