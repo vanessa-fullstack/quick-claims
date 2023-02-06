@@ -4,10 +4,11 @@ import { useNavigate } from 'react-router-dom';
 //This is the edit rows in search claims page
 const EditSearchRow = (props) => {
  
-    return (
+    return ( 
         <tr>
             <td>
-                <input type="text" placeholder="Cannot update..." name="id" disabled={true}></input>
+                <input type="text" placeholder="Cannot update..." name="id" disabled={true}
+                value={props.editClaimData.id}></input>
             </td>
             <td>
                 <input type="text" placeholder="Update Name..." name="customerName" 

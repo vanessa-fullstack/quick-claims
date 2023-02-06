@@ -43,7 +43,7 @@ export const getAllClaimsForPolicyNumber  = (id) => {
 }
 
 export const getAllClaimsForInsuranceType  = (insuranceType) => {
-    return axios({url : "http://localhost:8080/api/quickclaim?policyNumber="+insuranceType,
+    return axios({url : "http://localhost:8080/api/quickclaim?insuranceType="+insuranceType,
             method: "GET", 
             headers: {"Accept" : "application/json"}
             })
@@ -66,10 +66,14 @@ export const getStatuses = ()  => {
             })
 }
 
+//update            PUT /api/payment/142645
+
 export const updateExitingClaim = (claim) => {
-    console.log(claim);
-    return axios({url : "http://localhost:8080/api/quickclaim",
+    console.log("Checking this ", claim);
+    return axios({url : "http://localhost:8080/api/quickclaim/"+claim.id,
             method: "PUT",
             headers: {"Accept" : "application/json", "Content-Type" : "application/json"},
+            data: claim
         })
+        
 }//this function may update depending on the api url 

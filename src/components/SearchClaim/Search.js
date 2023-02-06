@@ -19,6 +19,7 @@ const Search = ( props ) => {
     const [editClaimFields, setEditClaimFields] = useState(searchClaims);
     const [editClaimId, setEditClaimId] = useState(null);
     const [editClaimData, setEditClaimData] = useState({
+        id: "",
         customerName: "",
         status: "",
         insuranceType: "",
@@ -94,8 +95,30 @@ const Search = ( props ) => {
         event.preventDefault();
         console.log("Searching for", searchTerm )
 
+        // const editedClaim = {
+        //     id: editClaimData.editClaimId,
+        //     customerName: editClaimData.customerName,
+        //     status: editClaimData.status,
+        //     insuranceType: editClaimData.insuranceType,
+        //     date: editClaimData.date,
+        //     amount: editClaimData.amount,
+        //     reason: editClaimData.reason
+        // }
+
+        // const newClaimDetails = [...editClaimFields];
+        // const index = editClaimFields.findIndex((claim) => claim.id === props.editClaimId);
+
+        // newClaimDetails[index] = editedClaim;
+        // setEditClaimFields(newClaimDetails);
+        // setEditClaimId(null);
+    }
+
+
+    const handleSaveClick = (event) => { //look at this const again... falling to catch block
+        event.preventDefault();
+
         const editedClaim = {
-            id: editClaimId,
+            id: editClaimData.id,
             customerName: editClaimData.customerName,
             status: editClaimData.status,
             insuranceType: editClaimData.insuranceType,
@@ -105,27 +128,28 @@ const Search = ( props ) => {
         }
 
         const newClaimDetails = [...editClaimFields];
-        const index = editClaimFields.findIndex((claim) => claim.id === editClaimId);
+        const index = editClaimFields.findIndex((claim) => claim.id === props.editClaimData.editClaimId);
 
         newClaimDetails[index] = editedClaim;
         setEditClaimFields(newClaimDetails);
         setEditClaimId(null);
-    }
-
-    const handleSaveClick = (event) => { //look at this const again... cors policy block in console
+    
         setMessage("Saving...");
-        updateExitingClaim()
+        (console.log("updating existing quick claim ", editedClaim))
+        updateExitingClaim(editedClaim)
             .then( response => {
                 if (response.status === 200) {
-                    setMessage("New transaction added with Policy Number " + response.data.id);
+                    setMessage("Updated Quick Claim for " + response.data.customerName);
                 }
                 else {
-                    setMessage("Something went wrong - status code was " + response.status);
+                    console.log("Something went wrong in .then else ", response)
+                    setMessage("Something went wrong with update - status code was " + response.status);
                 }
         
             } )
             .catch( error => {
-                setMessage("Something went wrong - " + error);
+                console.log("Inside Catch block " + error)
+                setMessage("Something went wrong on update - " + error);
             })
 
     }
@@ -136,6 +160,7 @@ const Search = ( props ) => {
         setEditClaimId(props.customerName);
 
         const claimValues = {
+            id: props.id,
             customerName: props.customerName,
             status: props.status,
             insuranceType: props.insuranceType,
@@ -204,7 +229,7 @@ const Search = ( props ) => {
                     <Fragment>
                     {editClaimId === claim.customerName ? (
                         <EditSearchRow 
-                        key={index}
+                        key={index} id={claim.id}
                         customerName={claim.customerName} 
                         status={claim.status} insuranceType={claim.insuranceType} 
                         date={claim.date} amount={claim.amount} reason={claim.reason}
@@ -222,7 +247,8 @@ const Search = ( props ) => {
                 } )
             }
         </tbody>
-        </table> 
+        </table>
+        {message} 
         </div>
         </form>
     </div>
