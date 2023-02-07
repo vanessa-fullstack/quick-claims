@@ -62,7 +62,7 @@ const NewClaim = () => {
 
     const initialNewClaimState = {customerName : "", insuranceType : "",
     date : new Date().toISOString().slice(0,10), amount : "",
-    reason : "", description : "", status : "Active", address : null, makeOfVehicle : null, modelOfVehicle : null,
+    reason : "", description : "", status : "", address : null, makeOfVehicle : null, modelOfVehicle : null,
     yearOfManufacture : null, animal : null, breed : null}
 
     const formReducer = (state, data) => {
@@ -95,6 +95,8 @@ const NewClaim = () => {
             })
     }
 
+
+
     return (
             <div className="container">
             <form className="container"  onSubmit={handleSubmit} >
@@ -114,8 +116,12 @@ const NewClaim = () => {
             </p>
             <p>
                 <label htmlFor="insuranceType">Insurance Type *</label>
-                <input type="text" id="insuranceType" placeholder='e.g.Car, Home or Pet' value={newClaim.insuranceType}
-                onChange={handleChange} style={{border : valid ? "2px solid #000" : "2px solid #f00"}} />
+                <select name="insuranceType" id="insuranceType" value={newClaim.insuranceType} onChange={handleChange}>
+                    <option hidden={true}>---Select Insurance Type---</option>
+                    <option>Car</option>
+                    <option>Home</option>
+                    <option>Pet</option>
+                </select>
             </p>
             <p>
                 <label htmlFor="date">Claim Start Date *</label>
@@ -138,8 +144,18 @@ const NewClaim = () => {
                 onChange={handleChange} style={{border : valid ? "2px solid #000" : "2px solid #f00"}}/>
             </p>
             <p>
-                <label htmlFor="status">Status</label>
-                <input type="text" name="status" id="status" placeholder="Active" value={newClaim.status} onChange={handleChange}/>
+            <label htmlFor="status">Status *</label>
+                <select name="status" id="status" value={newClaim.status} onChange={handleChange}>
+                <option hidden={true}>---Select Status---</option>
+                    <option>Active</option>
+                    <option>Waiting</option>
+                    <option>Awaiting Payment</option>
+                    <option>Closed</option>
+                    <option>Rejected</option>
+                    <option>Passed on</option>
+                </select>
+                {/* <label htmlFor="status">Status</label>
+                <input type="text" name="status" id="status" placeholder="Active" value={newClaim.status} onChange={handleChange}/> */}
             </p>
 
             <div className='property'>
