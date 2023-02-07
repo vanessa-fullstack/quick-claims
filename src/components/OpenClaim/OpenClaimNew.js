@@ -69,7 +69,7 @@ const OpenClaim = (props) => {
     <li>Active (currently being worked on)</li>
     <li>Waiting on assessment (not yet reviewed)</li>
     <li>Awaiting Payment (accepted but needs paid)</li>
-    <li>Closed</li>
+    <li>Closed (accepted and paid)</li>
     <li>Rejected</li>
     <li>Passed to main platform</li>
     </ul>

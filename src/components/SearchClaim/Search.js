@@ -1,9 +1,8 @@
 import { useEffect, useState, Fragment } from "react"
-import { getAllClaimsAxiosVersion, getAllClaimsForName, getAllClaimsForPolicyNumber, updateExitingClaim } from "../../data/DataFunctions.js";
+import { getAllClaimsAxiosVersion, getAllClaimsForName, updateExitingClaim } from "../../data/DataFunctions.js";
 import { useNavigate } from 'react-router-dom';
 import SearchClaimsRow from "./SearchClaimsRow";
 import EditSearchRow from "./EditSearchRow";
-import axios from "axios"
 
 //THIS WAS A REDO AND CURRENTLY IN USE
 const Search = ( props ) => {
@@ -124,6 +123,15 @@ const Search = ( props ) => {
         updateExitingClaim(editedClaim)
             .then( response => {
                 if (response.status === 200) {
+                    getAllClaimsForName(searchTerm)
+            .then( response => {
+                setSearchClaims(response.data);
+                setIsLoading(false);
+                console.log("names here")
+            })
+            .catch( error => {
+                console.log("something went wrong ", error);
+            })
                     setMessage("Updated Quick Claim for " + response.data.customerName);
                 }
                 else {

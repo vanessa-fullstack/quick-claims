@@ -1,5 +1,3 @@
-// import axios from "axios";
-
 import axios from "axios"
 
 // const headers = new Headers({"Accept":"application/json"})
