@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import SearchClaimsRow from "./SearchClaimsRow";
 import EditSearchRow from "./EditSearchRow";
 
-//THIS WAS A REDO AND CURRENTLY IN USE
+//---CURRENTLY IN USE---//
 const Search = ( props ) => {
 
     const [searchTerm, setSearchTerm] = useState("");

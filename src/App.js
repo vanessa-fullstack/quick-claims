@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
+import './components/stylesheet.css';
 import DisplayClaim from './components/DisplayClaim/DisplayClaim';
 import Footer from './components/Footer';
 import Menu from './components/Menu';
