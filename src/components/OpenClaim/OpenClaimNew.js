@@ -2,13 +2,16 @@ import { getAllClaimsAxiosVersion, getAllClaimsForName, getAllClaimsForStatus } 
 import OpenClaimsRow from './OpenClaimsRow';
 import '../stylesheet.css';
 import {useSelector, useDispatch} from 'react-redux';
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { UserContext } from '../contexts/UserContext';
 
 
 const OpenClaim = (props) => {
 
     const [openClaims, setOpenClaims] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const currentUser = useContext(UserContext);
+
 
     useEffect( () => {
         //loadStatus();
@@ -32,7 +35,7 @@ const OpenClaim = (props) => {
 
     const loadData= () =>{
         
-        getAllClaimsAxiosVersion()
+        getAllClaimsAxiosVersion(currentUser.user.name, currentUser.user.password)
         .then(response =>{
             if (response.status === 200){
                 console.log("everything is ok");

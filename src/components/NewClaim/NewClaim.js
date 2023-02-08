@@ -21,7 +21,7 @@ const NewClaim = () => {
     }
     
     const hidePropertySection = () => {
-        const x = document.getElementById("address");
+        const x = document.getElementById("propertyFields");
         if(x.style.display === "none"){
             x.style.display = "block";
             document.getElementById("propSection").innerText = "^Property Insurance Claims Only";
@@ -160,7 +160,7 @@ const NewClaim = () => {
 
             <div className='property'>
                 <h3 id="propSection" onClick={hidePropertySection}>&gt;Property Insurance Claims Only</h3>
-                <ul id="property">
+                <ul id="propertyFields">
                 <label htmlFor="address">Address of Property Affected</label>
                 <input type="text" name="address" id="address" placeholder="e.g. 123 Main Street" value={newClaim.address} onChange={handleChange}/>
                 </ul>
@@ -175,16 +175,14 @@ const NewClaim = () => {
                 <label htmlFor="modelOfVehicle">Model of Vehicle</label>
                 <input type="text" name="modelOfVehicle" id="modelOfVehicle" placeholder="e.g. Fiesta" value={newClaim.modelOfVehicle} onChange={handleChange}/>
                 </p>
-
                 <p>
                 <label htmlFor="yearOfManufacture">Year of Manufacture</label>
                 <input type="text" name="yearOfManufacture" id="yearOfManufacture" placeholder="e.g. 2020" value={newClaim.yearOfManufacture} onChange={handleChange}/>
                 </p>
-                </ul>
-                
+                </ul>   
             </div>
             
-            <div>
+            <div className='pet'>
                 <h3 id="petSection" onClick={hidePetSection}>&gt;Pet Insurance Claims Only</h3>
                 <ul id="pet">
                 <label htmlFor="animal">Type of Animal</label>

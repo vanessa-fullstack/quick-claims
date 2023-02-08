@@ -9,7 +9,7 @@ h1{
 
 .container{
     border: 1px solid #ccc;
-    width: 900px;
+    width: 800px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -17,6 +17,13 @@ h1{
 .searchcontainer{
     border: 1px solid #ccc;
     width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.logincontainer{
+    border: 1px solid #ccc;
+    width: 1000px;
     margin-left: auto;
     margin-right: auto;
 }

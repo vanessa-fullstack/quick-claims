@@ -1,8 +1,9 @@
-import { useEffect, useState, Fragment } from "react"
+import { useEffect, useState, Fragment, useContext } from "react"
 import { getAllClaimsAxiosVersion, getAllClaimsForName, updateExitingClaim } from "../../data/DataFunctions.js";
 import { useNavigate } from 'react-router-dom';
 import SearchClaimsRow from "./SearchClaimsRow";
 import EditSearchRow from "./EditSearchRow";
+import { UserContext } from "../contexts/UserContext.js";
 
 //---CURRENTLY IN USE---//
 const Search = ( props ) => {
@@ -11,6 +12,8 @@ const Search = ( props ) => {
     const [valid, setValid] = useState(true);
     const [touched, setTouched] = useState(false);
     const [message, setMessage] = useState();
+    const currentUser = useContext(UserContext);
+
 
     const [searchClaims, setSearchClaims] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -24,7 +27,8 @@ const Search = ( props ) => {
         insuranceType: "",
         date: "",
         amount: "",
-        reason: ""
+        reason: "",
+        description: ""
     });
 
     useEffect( () => {
@@ -48,7 +52,7 @@ const Search = ( props ) => {
 
     const loadData= () =>{
         
-        getAllClaimsAxiosVersion()
+        getAllClaimsAxiosVersion(currentUser.user.name, currentUser.user.password)
         .then(response =>{
             if (response.status === 200){
                 console.log("everything is ok with axios call");
