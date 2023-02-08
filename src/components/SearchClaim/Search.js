@@ -38,7 +38,7 @@ const Search = ( props ) => {
     useEffect( () => {
         if(searchTerm !== ""){
             setIsLoading(true);
-            getAllClaimsForName(searchTerm)
+            getAllClaimsForName(searchTerm, currentUser.user.name, currentUser.user.password)
             .then( response => {
                 setSearchClaims(response.data);
                 setIsLoading(false);
@@ -127,7 +127,7 @@ const Search = ( props ) => {
         updateExitingClaim(editedClaim)
             .then( response => {
                 if (response.status === 200) {
-                    getAllClaimsForName(searchTerm)
+                    getAllClaimsForName(searchTerm, currentUser.user.name, currentUser.user.password)
             .then( response => {
                 setSearchClaims(response.data);
                 setIsLoading(false);

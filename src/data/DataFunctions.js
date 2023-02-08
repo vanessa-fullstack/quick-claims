@@ -15,25 +15,25 @@ const getAuthHeader = (username, password) =>{
 }
 
 
-export const getAllClaimsAxiosVersion  = () => {
+export const getAllClaimsAxiosVersion  = (username, password) => {
     return axios({url : "http://localhost:8080/api/quickclaim",
             method: "GET", 
-            headers: {"Accept" : "application/json", "Authorization" : "Basic " + btoa("vanessa:pass1")}
+            headers: {"Accept" : "application/json", ...getAuthHeader(username, password)}
             })
 }//loading data to the open claims page from the database
 
-export const getAllClaimsForStatus  = (status) => {
+export const getAllClaimsForStatus  = (status, username, password) => {
     console.log("getAllClaimsForStatus")
     return axios({url : "http://localhost:8080/api/quickclaim?status="+status,
             method: "GET", 
-            headers: {"Accept" : "application/json" , "Authorization" : "Basic " + btoa("vanessa:pass1")}
+            headers: {"Accept" : "application/json" , ...getAuthHeader(username, password)}
             })
 }
 
-export const getAllClaimsForName  = (customerName) => {
+export const getAllClaimsForName  = (customerName, username, password) => {
     return axios({url : "http://localhost:8080/api/quickclaim?customerName="+customerName,
             method: "GET", 
-            headers: {"Accept" : "application/json", "Authorization" : "Basic " + btoa("vanessa:pass1")}
+            headers: {"Accept" : "application/json", ...getAuthHeader(username, password)}
             })
 }
 
@@ -51,11 +51,11 @@ export const getAllClaimsForInsuranceType  = (insuranceType) => {
             })
 }
 
-export const addNewClaim = (claim) => {
+export const addNewClaim = (claim, username, password) => {
     console.log(claim);
     return axios({url : "http://localhost:8080/api/quickclaim",
             method: "POST",
-            headers: {"Accept" : "application/json", "Content-Type" : "application/json", "Authorization" : "Basic " + btoa("vanessa:pass1")},
+            headers: {"Accept" : "application/json", "Content-Type" : "application/json", ...getAuthHeader(username, password)},
             data: claim
         })
 }//this function may update depending on the api url 
@@ -74,7 +74,7 @@ export const updateExitingClaim = (claim) => {
     console.log("Checking this ", claim);
     return axios({url : "http://localhost:8080/api/quickclaim/"+claim.id,
             method: "PUT",
-            headers: {"Accept" : "application/json", "Content-Type" : "application/json", "Authorization" : "Basic " + btoa("vanessa:pass1")},
+            headers: {"Accept" : "application/json", "Content-Type" : "application/json"},
             data: claim
         })
         

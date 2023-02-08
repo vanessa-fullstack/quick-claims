@@ -1,12 +1,15 @@
-import { useReducer, useState } from 'react';
+import { useContext, useReducer, useState } from 'react';
 import { addNewClaim } from '../../data/DataFunctions';
 import ClaimsSelector from '../ClaimsSelector';
+import { UserContext } from '../contexts/UserContext';
 import '../stylesheet.css';
 
 const NewClaim = () => {
 
     const [message, setMessage] = useState();
     const [valid, setValid] = useState(true);
+    const currentUser = useContext(UserContext);
+
 
     const hideInstructions = () => {
         const x = document.getElementById("list");
@@ -80,7 +83,7 @@ const NewClaim = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         setMessage("Saving...");
-        addNewClaim(newClaim)
+        addNewClaim(newClaim, currentUser.user.name, currentUser.user.password)
             .then( response => {
                 if (response.status === 200) {
                     setMessage("New transaction added with Policy Number " + response.data.id);
