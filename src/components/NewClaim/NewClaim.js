@@ -119,7 +119,9 @@ const NewClaim = () => {
             </p>
             <p>
                 <label htmlFor="insuranceType">Insurance Type *</label>
-                <select name="insuranceType" id="insuranceType" value={newClaim.insuranceType} onChange={handleChange}>
+                <select name="insuranceType" id="insuranceType" value={newClaim.insuranceType} onChange={handleChange}
+                style={{border : valid ? "2px solid #000" : "2px solid #f00"}}
+                className={ valid ? "" : "insuranceTypeError"}>
                     <option hidden={true}>---Select Insurance Type---</option>
                     <option>Car</option>
                     <option>Home</option>
@@ -134,7 +136,8 @@ const NewClaim = () => {
             <p>
                 <label htmlFor="amount">Estimated Amount of Claim *</label>
                 <input type="text" name="amount" id="amount" placeholder="e.g.$250" value={newClaim.amount}
-                onChange={handleChange} style={{border : valid ? "2px solid #000" : "2px solid #f00"}}/>
+                onChange={handleChange} style={{border : valid ? "2px solid #000" : "2px solid #f00"}}
+                className={ valid ? "" : "amountBoxError"}/>
             </p>
             <p>
                 <label htmlFor="reason">Reason For Claim *</label>
@@ -148,7 +151,9 @@ const NewClaim = () => {
             </p>
             <p>
             <label htmlFor="status">Status *</label>
-                <select name="status" id="status" value={newClaim.status} onChange={handleChange}>
+                <select name="status" id="status" value={newClaim.status} onChange={handleChange}
+                style={{border : valid ? "2px solid #000" : "2px solid #f00"}}
+                className={ valid ? "" : "statusError"}>
                 <option hidden={true}>---Select Status---</option>
                     <option>Active</option>
                     <option>Waiting</option>

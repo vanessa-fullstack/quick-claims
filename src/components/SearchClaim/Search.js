@@ -6,7 +6,7 @@ import EditSearchRow from "./EditSearchRow";
 import { UserContext } from "../contexts/UserContext.js";
 
 //---CURRENTLY IN USE---//
-const Search = ( props ) => {
+const Search = (props) => {
 
     const [searchTerm, setSearchTerm] = useState("");
     const [valid, setValid] = useState(true);
@@ -31,46 +31,46 @@ const Search = ( props ) => {
         description: ""
     });
 
-    useEffect( () => {
+    useEffect(() => {
         loadData();
-    }, [] );
+    }, []);
 
-    useEffect( () => {
-        if(searchTerm !== ""){
+    useEffect(() => {
+        if (searchTerm !== "") {
             setIsLoading(true);
             getAllClaimsForName(searchTerm, currentUser.user.name, currentUser.user.password)
-            .then( response => {
-                setSearchClaims(response.data);
-                setIsLoading(false);
-                console.log("names here")
-            })
-            .catch( error => {
-                console.log("something went wrong ", error);
-            })
+                .then(response => {
+                    setSearchClaims(response.data);
+                    setIsLoading(false);
+                    console.log("names here")
+                })
+                .catch(error => {
+                    console.log("something went wrong ", error);
+                })
         }
-    }, [searchTerm] );
+    }, [searchTerm]);
 
-    const loadData= () =>{
-        
+    const loadData = () => {
+
         getAllClaimsAxiosVersion(currentUser.user.name, currentUser.user.password)
-        .then(response =>{
-            if (response.status === 200){
-                console.log("everything is ok with axios call");
-                setIsLoading(false);
-                setSearchClaims(response.data);
+            .then(response => {
+                if (response.status === 200) {
+                    console.log("everything is ok with axios call");
+                    setIsLoading(false);
+                    setSearchClaims(response.data);
 
-            }
-            else{
-                console.log("something went wrong ", response.status)
-            }
-        })
-        .catch( error => {
-            console.log("Something went wrong ", error);
-        })
+                }
+                else {
+                    console.log("something went wrong ", response.status)
+                }
+            })
+            .catch(error => {
+                console.log("Something went wrong ", error);
+            })
     }
 
-    
-    const allCustomerName = searchClaims.map( claim => claim.customerName);
+
+    const allCustomerName = searchClaims.map(claim => claim.customerName);
     const uniqueCustomerName = allCustomerName.filter((customerName, index) => allCustomerName.indexOf(customerName) === index);
     console.log(uniqueCustomerName);
 
@@ -79,16 +79,14 @@ const Search = ( props ) => {
         const option = event.target.options.selectedIndex;
         setSelectedClaim(uniqueCustomerName[option]);
         setTouched(true);
-        //setSearchTerm(event.target.value);
         checkValidity(event.target.value);
     }
-
 
     const checkValidity = (value) => {
         setValid(value.trim().length > 0);
     }
 
-    const handleChange = (event) =>{
+    const handleChange = (event) => {
         setTouched(true);
         setSearchTerm(event.target.value);
         checkValidity(event.target.value);
@@ -96,12 +94,11 @@ const Search = ( props ) => {
 
     const doSearch = (event) => {
         event.preventDefault();
-        console.log("Searching for", searchTerm )
+        console.log("Searching for", searchTerm)
 
     }
 
-
-    const handleSaveClick = (event) => { 
+    const handleSaveClick = (event) => {
         event.preventDefault();
 
         const editedClaim = {
@@ -121,32 +118,32 @@ const Search = ( props ) => {
         newClaimDetails[index] = editedClaim;
         setEditClaimFields(newClaimDetails);
         setEditClaimId(null);
-    
+
         setMessage("Saving...");
         (console.log("updating existing quick claim ", editedClaim))
-        updateExitingClaim(editedClaim)
-            .then( response => {
+        updateExitingClaim(editedClaim, currentUser.user.name, currentUser.user.password )
+            .then(response => {
                 if (response.status === 200) {
                     getAllClaimsForName(searchTerm, currentUser.user.name, currentUser.user.password)
-            .then( response => {
-                setSearchClaims(response.data);
-                setIsLoading(false);
-                console.log("names here")
-            })
-            .catch( error => {
-                console.log("something went wrong ", error);
-            })
+                        .then(response => {
+                            setSearchClaims(response.data);
+                            setIsLoading(false);
+                            console.log("names here")
+                        })
+                        .catch(error => {
+                            console.log("something went wrong ", error);
+                        })
                     setMessage("Updated Quick Claim for " + response.data.customerName);
                 }
                 else {
                     console.log("Something went wrong in .then else ", response)
-                    setMessage("Something went wrong with update - status code was " + response.status);
+                    setMessage("You cannot update this Quick Claim - status code was " + response.status);
                 }
-        
-            } )
-            .catch( error => {
+
+            })
+            .catch(error => {
                 console.log("Inside Catch block " + error)
-                setMessage("Something went wrong on update - " + error);
+                setMessage("You cannot update this Quick Claim - " + error);
             })
 
     }
@@ -169,7 +166,7 @@ const Search = ( props ) => {
         setEditClaimData(claimValues);
     }
 
-    const handleEditClaimData = (event) =>{
+    const handleEditClaimData = (event) => {
         event.preventDefault();
 
         const fieldName = event.target.getAttribute("name");
@@ -187,70 +184,70 @@ const Search = ( props ) => {
 
     return <div className="searchcontainer">
         <form onSubmit={doSearch}>
-        {/* <form> */}
-        <h1>Search For a Claim</h1>
-        <h2>Enter the customer name</h2>
-        <ul>
-            <li>Complete the following fields.</li>
-            <li>When a suitable name is found, information will load in the table below.</li>
-            <li>If the name is not in the database, no information will be found.</li>
-            <li>To search for another name, click the 'X' in the text box.</li>
-            <li>To edit a row click the 'Edit' button that appears.</li>
-        </ul>
-        <label htmlFor="customerName">Customer Name</label>
-        <input onChange={handleChange} id="customerName" type="search"
-        placeholder="e.g. Jane Doe" style={{border : valid ? "2px solid #000" : "2px solid #f00"}}
-        className={ valid ? "" : "searchBoxError"}
-        />
-        {/* <button type="submit" disabled={!valid || !touched} onChange={changeClaimName} value={searchTerm} >
+            {/* <form> */}
+            <h1>Search For a Claim</h1>
+            <h2>Enter the customer name</h2>
+            <ul>
+                <li>Complete the following fields.</li>
+                <li>When a suitable name is found, information will load in the table below.</li>
+                <li>If the name is not in the database, no information will be found.</li>
+                <li>To search for another name, click the 'X' in the text box.</li>
+                <li>To edit a row click the 'Edit' button that appears.</li>
+            </ul>
+            <label htmlFor="customerName">Customer Name</label>
+            <input onChange={handleChange} id="customerName" type="search"
+                placeholder="e.g. Jane Doe" style={{ border: valid ? "2px solid #000" : "2px solid #f00" }}
+                className={valid ? "" : "searchBoxError"}
+            />
+            {/* <button type="submit" disabled={!valid || !touched} onChange={changeClaimName} value={searchTerm} >
         Search</button> */}
-        {isLoading && <p style={{textAlign : "center"}}>Please wait... loading</p>}
-        <div className="editSearchRow">
-        <table className="searchTransactionsTable">
-        <thead>
-        <tr>
-            <th>Policy Number</th>
-            <th>Customer Name</th>
-            <th>Status</th>
-            <th>Insurance Type</th>
-            <th>Date</th>
-            <th>Amount</th>
-            <th>Reason</th>
-            <th>Description</th>
-            <th>Action</th>
-        </tr>
-        </thead>
-        <tbody>
-            {
-                searchClaims.map( (claim, index) =>{
+            {isLoading && <p style={{ textAlign: "center" }}>Please wait... loading</p>}
+            <div className="editSearchRow">
+                <table className="searchTransactionsTable">
+                    <thead>
+                        <tr>
+                            <th>Policy Number</th>
+                            <th>Customer Name</th>
+                            <th>Status</th>
+                            <th>Insurance Type</th>
+                            <th>Date</th>
+                            <th>Amount</th>
+                            <th>Reason</th>
+                            <th>Description</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            searchClaims.map((claim, index) => {
 
-                    return claim.customerName === selectedClaim || searchTerm !== "" &&
-                    <Fragment>
-                    {editClaimId === claim.customerName ? (
-                        <EditSearchRow 
-                        key={index} id={claim.id}
-                        customerName={claim.customerName} 
-                        status={claim.status} insuranceType={claim.insuranceType} 
-                        date={claim.date} amount={claim.amount} reason={claim.reason}
-                        description={claim.description}
-                        editClaimData={editClaimData} handleEditClaimData={handleEditClaimData}
-                        handleCancel={handleCancel} handleSaveClick={handleSaveClick}
-                        />
-                    ) : (
-                        <SearchClaimsRow key={index} id={claim.id}
-                        customerName={claim.customerName} 
-                        status={claim.status} insuranceType={claim.insuranceType} 
-                        date={claim.date} amount={claim.amount} reason={claim.reason}
-                        description={claim.description} 
-                        handleEditClick={handleEditClick}  />
-                    )}
-                    </Fragment>
-                } )
-            }
-        </tbody>
-        </table>
-        {message} 
-        </div>
+                                return claim.customerName === selectedClaim || searchTerm !== "" &&
+                                    <Fragment>
+                                        {editClaimId === claim.customerName ? (
+                                            <EditSearchRow
+                                                key={index} id={claim.id}
+                                                customerName={claim.customerName}
+                                                status={claim.status} insuranceType={claim.insuranceType}
+                                                date={claim.date} amount={claim.amount} reason={claim.reason}
+                                                description={claim.description}
+                                                editClaimData={editClaimData} handleEditClaimData={handleEditClaimData}
+                                                handleCancel={handleCancel} handleSaveClick={handleSaveClick}
+                                            />
+                                        ) : (
+                                            <SearchClaimsRow key={index} id={claim.id}
+                                                customerName={claim.customerName}
+                                                status={claim.status} insuranceType={claim.insuranceType}
+                                                date={claim.date} amount={claim.amount} reason={claim.reason}
+                                                description={claim.description}
+                                                handleEditClick={handleEditClick} />
+                                        )}
+                                    </Fragment>
+                            })
+                        }
+                    </tbody>
+                </table>
+                {message}
+            </div>
         </form>
     </div>
 }

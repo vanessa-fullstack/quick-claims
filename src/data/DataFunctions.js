@@ -70,11 +70,11 @@ export const getStatuses = ()  => {
 
 //update PUT /api/payment/142645
 
-export const updateExitingClaim = (claim) => {
+export const updateExitingClaim = (claim, username, password) => {
     console.log("Checking this ", claim);
     return axios({url : "http://localhost:8080/api/quickclaim/"+claim.id,
             method: "PUT",
-            headers: {"Accept" : "application/json", "Content-Type" : "application/json"},
+            headers: {"Accept" : "application/json", "Content-Type" : "application/json", ...getAuthHeader(username, password)},
             data: claim
         })
         

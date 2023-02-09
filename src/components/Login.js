@@ -7,6 +7,7 @@ const Login = () => {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [touched, setTouched] = useState(false);
 
     const [params, setParams] = useSearchParams();
     const target = params.get("target");
@@ -20,6 +21,7 @@ const Login = () => {
     }
 
     const updatePassword = (event) => {
+        setTouched(true);
         setPassword(event.target.value);
     }
 
@@ -47,7 +49,7 @@ const Login = () => {
         <label htmlFor="password">Password:</label>
         <input id="password" type="password" value={password} onChange={updatePassword} />
         </p>
-        <button type="submit">Login</button>
+        <button type="submit" disabled={!touched}>Login</button>
     </form>
     </div>
     )
