@@ -12,6 +12,12 @@ const SearchClaimsRow = (props) => {
             <td>{props.amount}</td>
             <td>{props.reason}</td>
             <td>{props.description}</td>
+            <td>{props.address}</td>
+            <td>{props.makeOfVehicle}</td>
+            <td>{props.modelOfVehicle}</td>
+            <td>{props.yearOfManufacture}</td>
+            <td>{props.animal}</td>
+            <td>{props.breed}</td>
             <td>
                 <button 
                 type="button"

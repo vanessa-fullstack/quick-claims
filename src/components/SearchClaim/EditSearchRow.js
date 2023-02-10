@@ -39,6 +39,30 @@ const EditSearchRow = (props) => {
                 value={props.editClaimData.description} onChange={props.handleEditClaimData}></input>
             </td>
             <td>
+                <input type="text" placeholder="Update Car Make if needed..." name="makeOfVehicle"
+                value={props.editClaimData.makeOfVehicle} onChange={props.handleEditClaimData}></input>
+            </td>
+            <td>
+                <input type="text" placeholder="Update Car Model if needed..." name="modelOfVehicle"
+                value={props.editClaimData.modelOfVehicle} onChange={props.handleEditClaimData}></input>
+            </td>
+            <td>
+                <input type="text" placeholder="Update Car Year if needed..." name="yearOfManufacture"
+                value={props.editClaimData.yearOfManufacture} onChange={props.handleEditClaimData}></input>
+            </td>
+            <td>
+                <input type="text" placeholder="Update address if needed..." name="address"
+                value={props.editClaimData.address} onChange={props.handleEditClaimData}></input>
+            </td>
+            <td>
+                <input type="text" placeholder="Update animal if needed..." name="animal"
+                value={props.editClaimData.animal} onChange={props.handleEditClaimData}></input>
+            </td>
+            <td>
+                <input type="text" placeholder="Update breed if needed..." name="breed"
+                value={props.editClaimData.breed} onChange={props.handleEditClaimData}></input>
+            </td>
+            <td>
                 <button type="submit" onClick={props.handleSaveClick}>Save</button>
                 <button type="submit" onClick={props.handleCancel}>Cancel</button>
             </td>

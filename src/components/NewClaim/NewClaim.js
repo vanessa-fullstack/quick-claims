@@ -65,8 +65,8 @@ const NewClaim = () => {
 
     const initialNewClaimState = {customerName : "", insuranceType : "",
     date : new Date().toISOString().slice(0,10), amount : "",
-    reason : "", description : "", status : "", address : null, makeOfVehicle : null, modelOfVehicle : null,
-    yearOfManufacture : null, animal : null, breed : null}
+    reason : "", description : "", status : "", address : "", makeOfVehicle : "", modelOfVehicle : "",
+    yearOfManufacture : "", animal : "", breed : ""}
 
     const formReducer = (state, data) => {
         return {...state, [data.field] : data.value}

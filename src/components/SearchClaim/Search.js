@@ -28,7 +28,13 @@ const Search = (props) => {
         date: "",
         amount: "",
         reason: "",
-        description: ""
+        description: "",
+        makeOfVehicle: null,
+        modelOfVehicle: null,
+        yearOfManufacture:null,
+        address: null,
+        animal: null,
+        breed: null
     });
 
     useEffect(() => {
@@ -109,7 +115,13 @@ const Search = (props) => {
             date: editClaimData.date,
             amount: editClaimData.amount,
             reason: editClaimData.reason,
-            description: editClaimData.description
+            description: editClaimData.description,
+            makeOfVehicle: editClaimData.makeOfVehicle,
+            modelOfVehicle: editClaimData.modelOfVehicle,
+            yearOfManufacture: editClaimData.yearOfManufacture,
+            address: editClaimData.address,
+            animal: editClaimData.animal,
+            breed: editClaimData.breed
         }
 
         const newClaimDetails = [...editClaimFields];
@@ -161,7 +173,13 @@ const Search = (props) => {
             date: props.date,
             amount: props.amount,
             reason: props.reason,
-            description: props.description
+            description: props.description,
+            makeOfVehicle: props.makeOfVehicle,
+            modelOfVehicle: props.modelOfVehicle,
+            yearOfManufacture: props.yearOfManufacture,
+            address: props.address,
+            animal: props.animal,
+            breed: props.breed
         }
         setEditClaimData(claimValues);
     }
@@ -214,7 +232,13 @@ const Search = (props) => {
                             <th>Amount</th>
                             <th>Reason</th>
                             <th>Description</th>
-                            <th>Action</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -229,7 +253,9 @@ const Search = (props) => {
                                                 customerName={claim.customerName}
                                                 status={claim.status} insuranceType={claim.insuranceType}
                                                 date={claim.date} amount={claim.amount} reason={claim.reason}
-                                                description={claim.description}
+                                                description={claim.description} makeOfVehicle={claim.makeOfVehicle}
+                                                modelOfVehicle={claim.modelOfVehicle} yearOfManufacture={claim.yearOfManufacture}
+                                                address={claim.address} animal={claim.animal} breed={claim.breed}
                                                 editClaimData={editClaimData} handleEditClaimData={handleEditClaimData}
                                                 handleCancel={handleCancel} handleSaveClick={handleSaveClick}
                                             />
@@ -238,7 +264,9 @@ const Search = (props) => {
                                                 customerName={claim.customerName}
                                                 status={claim.status} insuranceType={claim.insuranceType}
                                                 date={claim.date} amount={claim.amount} reason={claim.reason}
-                                                description={claim.description}
+                                                description={claim.description} address={claim.address} makeOfVehicle={claim.makeOfVehicle}
+                                                modelOfVehicle={claim.modelOfVehicle} yearOfManufacture={claim.yearOfManufacture}
+                                                animal={claim.animal} breed={claim.breed}
                                                 handleEditClick={handleEditClick} />
                                         )}
                                     </Fragment>
